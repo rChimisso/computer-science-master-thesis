@@ -1,0 +1,28 @@
+project:
+  name: qrc-spiking-thesis
+  seed: 42
+  seeds: [42, 43, 44, 45, 46]
+paths:
+  raw_data: data/raw
+  processed_data: data/processed
+  results: results
+dataset:
+  primary: shd
+  deferred: [dvs_gesture, ssc]
+  shd:
+    validation_speakers: [0, 1]
+    event_fields: [t, x, p]
+    timestamp_unit: microseconds
+  dvs_gesture:
+    event_fields: [t, x, y, p]
+    timestamp_unit: microseconds
+feasibility:
+  sample_limit: 100
+  visual_sample_count: 10
+  temporal_bin_us: 10000
+  shd_pooled_channels: 32
+  dvs_spatial_bins: 8
+  qrc_qubits: 6
+  qrc_circuit_depth: 2
+logging:
+  format: json
