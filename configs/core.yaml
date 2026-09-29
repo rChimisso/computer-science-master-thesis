@@ -1,0 +1,285 @@
+paths:
+  raw: data
+  cache: output
+  runs: output/runs
+  reference: configs/supplementary.yaml
+allocations: [[4, 2], [6, 2], [6, 4], [8, 2], [8, 4], [8, 6]]
+seeds: [42, 44, 46]
+folds: [[2, 6], [3, 11], [7, 9], [8, 10]]
+datasets:
+  shd:
+    adapter: pooling
+    depth: 1
+    segments: 8
+  dvs:
+    adapter: pca
+    depth: 3
+    segments: 4
+search:
+  depths: [1, 2, 3]
+  radii: [0.5, 0.9]
+  scales: [0.03, 0.1, 1.0]
+  timescales_ms: [20, 60, 200]
+anchors:
+  crc: {radius: 0.9, scale: 0.03, tau: 20}
+readout:
+  solver: cholesky
+  lambdas: [1.0e-05, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+selection:
+  equivalence: 0.005
+  supported_gain: 0.01
+  positive_folds: 3
+execution:
+  cpu_threads: 4
+  gpu_threads: 1
+  quantum_batch: 1
+  crc_batch: 128
+  job_seconds: 120
+  memory_fraction: 0.75
+  qrc_small: CPU
+  qrc_large: GPU
+  crc_device: cpu
+  crc_graphs: false
+  device: cuda
+profiles:
+  core: [comparison, generalization]
+  thesis: [comparison, mapping, observations, recurrence, generalization, learning-curves]
+data:
+  shd:
+    channels: 32
+    bin_us: 10000
+    duration_us: 1400000
+    confirmation_groups: [0, 1]
+  dvs:
+    grid: 8
+    bin_us: 50000
+    confirmation_groups: [1, 2, 3, 4]
+training:
+  max_epochs: 120
+  min_epochs: 20
+  patience: 15
+  min_delta: 0.001
+  batch_size: 128
+  gradient_clip: 1.0
+  cpu_threads: 4
+supporting:
+  mapping:
+    widths: [2, 4]
+    modes: [legacy, orthogonal, pooling, pca]
+    projection_seeds: [42, 44, 46]
+    anchors:
+      shd:
+        crc2:
+          model: crc
+          inputs: 2
+          view: all
+          segments: 8
+          summary: segment_mean_std_final
+          size: 18
+          radius: 0.9
+          scale: 0.03
+          tau: 20
+        crc4:
+          model: crc
+          inputs: 4
+          view: all
+          segments: 8
+          summary: segment_mean_std_final
+          size: 18
+          radius: 0.9
+          scale: 0.03
+          tau: 20
+        qrc2:
+          model: qrc
+          inputs: 2
+          view: all
+          segments: 8
+          summary: segment_mean_std_final
+          qubits: 6
+          depth: 1
+        qrc4:
+          model: qrc
+          inputs: 4
+          view: all
+          segments: 8
+          summary: segment_mean_std_final
+          qubits: 6
+          depth: 1
+      dvs:
+        crc2:
+          model: crc
+          inputs: 2
+          view: all
+          segments: 4
+          summary: segment_mean_std_final
+          size: 18
+          radius: 0.9
+          scale: 0.03
+          tau: 20
+        crc4:
+          model: crc
+          inputs: 4
+          view: all
+          segments: 4
+          summary: segment_mean_std_final
+          size: 18
+          radius: 0.9
+          scale: 0.03
+          tau: 20
+        qrc2:
+          model: qrc
+          inputs: 2
+          view: all
+          segments: 4
+          summary: segment_mean_std_final
+          qubits: 6
+          depth: 1
+        qrc4:
+          model: qrc
+          inputs: 4
+          view: all
+          segments: 4
+          summary: segment_mean_std_final
+          qubits: 6
+          depth: 1
+  learning_sizes: [600, 2000]
+  preprocessing:
+    max_epochs: 80
+    patience: 10
+    representations:
+      paper_counts: {channels: 700, bin_us: 10000, values: count}
+      original_log: {channels: 32, bin_us: 10000, values: log1p}
+      selected_log: {channels: 16, bin_us: 20000, values: log1p}
+  observations:
+    shd:
+      qrc2:
+        model: qrc
+        inputs: 2
+        view: all
+        qubits: 6
+        depth: 1
+      qrc4:
+        model: qrc
+        inputs: 4
+        view: all
+        qubits: 6
+        depth: 1
+      crc2:
+        model: crc
+        inputs: 2
+        view: all
+        size: 18
+        radius: 0.9
+        scale: 0.03
+        tau: 20
+      crc4:
+        model: crc
+        inputs: 4
+        view: all
+        size: 18
+        radius: 0.9
+        scale: 0.03
+        tau: 20
+    dvs:
+      qrc2:
+        model: qrc
+        inputs: 2
+        view: all
+        depth: 3
+        qubits: 6
+      qrc4:
+        model: qrc
+        inputs: 4
+        view: all
+        depth: 3
+        qubits: 6
+      crc2:
+        model: crc
+        inputs: 2
+        view: all
+        radius: 0.5
+        scale: 0.1
+        tau: 20
+        size: 18
+      crc4:
+        model: crc
+        inputs: 4
+        view: all
+        radius: 0.9
+        scale: 1.0
+        tau: 60
+        size: 18
+  recurrence:
+    shd:
+      qrc:
+        model: qrc
+        inputs: 4
+        qubits: 6
+        depth: 2
+        view: all
+      crc:
+        model: crc
+        inputs: 4
+        size: 18
+        radius: 0.5
+        scale: 1.0
+        tau: 20
+        view: all
+    dvs:
+      qrc:
+        model: qrc
+        inputs: 4
+        qubits: 6
+        depth: 3
+        view: all
+      crc:
+        model: crc
+        inputs: 4
+        size: 18
+        radius: 0.9
+        scale: 1.0
+        tau: 60
+        view: all
+  practical:
+    shd:
+      large_crc:
+        size: 256
+        radius: 0.9
+        scale: 0.03
+        tau: 20
+    dvs:
+      large_crc:
+        size: 256
+        radius: 0.9
+        scale: 0.03
+        tau: 20
+method:
+  input_transform: log1p
+  probability_gain: 0.5
+  projection_seed: 42
+  encoding: amplitude-probabilities
+  uploads: 1
+  virtual_nodes: 1
+  observables: [x, y, z]
+  entanglement: cz-ring
+  reset: partial
+  quantum_precision: complex128
+  classical_precision: float64
+  crc_sparsity: 0.5
+  summary: segment_mean_std_final
+  summary_ddof: 0
+  standardization: training-only
+  lsqr_tolerance: 0.001
+  lsqr_iterations: [1000, 5000]
+neural_recipes:
+  lstm:
+    dropout:
+      input_dropout: 0.4
+      output_dropout: 0.4
+    regularization:
+      weight_decay: 0.0001
+  transformer:
+    dropout:
+      dropout: 0.3
+    regularization:
+      weight_decay: 0.1

@@ -1,0 +1,5 @@
+bin_us,channels,classes,data_fingerprint,dataset,duration_definition,population,representation
+50000,128,11,e59ad868f8ce4c54971951d8dc2d52c989b491a35477ce1e593d15a96a5c903e,dvs,"Number of valid bins multiplied by bin width, not exact event span",test,"{""bin_us"": 50000, ""confirmation_groups"": [1, 2, 3, 4], ""grid"": 8}"
+50000,128,11,1ef6251436c001c188246a73968ee89541b490aa99ee70199c40f88067059797,dvs,"Number of valid bins multiplied by bin width, not exact event span",train,"{""bin_us"": 50000, ""confirmation_groups"": [1, 2, 3, 4], ""grid"": 8}"
+10000,32,20,7dd88feb5a951db98aac9f4ecc81b8877fe02ed2d577b93fc394bcdd8efb873f,shd,"Number of valid bins multiplied by bin width, not exact event span",test,"{""bin_us"": 10000, ""channels"": 32, ""confirmation_groups"": [0, 1], ""duration_us"": 1400000}"
+10000,32,20,7c341aee1f09b484dcbf600f8a6bf9fe25b8bd4992ed9e9751cfdfee1aa62cf2,shd,"Number of valid bins multiplied by bin width, not exact event span",train,"{""bin_us"": 10000, ""channels"": 32, ""confirmation_groups"": [0, 1], ""duration_us"": 1400000}"

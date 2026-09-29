@@ -1,0 +1,4661 @@
+{
+  "derived": {
+    "crc_leak": {
+      "formula": "1 - exp(-bin_width_ms / tau_ms)",
+      "origin": "derived",
+      "rationale": "Preserve physical retention times across dataset bin widths."
+    },
+    "ridge_alpha": {
+      "formula": "n_training * lambda",
+      "origin": "derived",
+      "rationale": "Keep sample-normalized regularization comparable across training sizes."
+    }
+  },
+  "implementation_conventions": {
+    "crc_bias_initialization": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc",
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "src/models/classical_reservoir.py"
+      ],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Retained uniform fixed bias range, not empirically optimized.",
+      "value": [
+        -0.1,
+        0.1
+      ]
+    },
+    "neural_precision": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [
+        "src/models/training.py",
+        "src/data/indexed.py"
+      ],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "PyTorch model parameters and batched inputs use float32; neural precision is not optimized.",
+      "value": "float32"
+    },
+    "quantum_rotation_initialization": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [
+        "src/models/quantum_execution.py"
+      ],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Retained random reservoir initialization; no claim that this distribution is task-optimal.",
+      "value": "Uniform(-pi,pi), independent seeded RY and RZ angles per qubit and layer"
+    }
+  },
+  "literature_checks": [
+    {
+      "checked": "2026-09-18",
+      "location": "Appendix B.2",
+      "source": "https://arxiv.org/html/1910.07407v3",
+      "supported": "LSTM size, input/recurrent dropout, Adamax family and temporal classification motivation; exact numerical optimizer defaults are not claimed as verified."
+    }
+  ],
+  "origins": [
+    "development-selected",
+    "literature-informed",
+    "controlled-comparison",
+    "derived",
+    "practical-default",
+    "unresolved"
+  ],
+  "parameters": {
+    "allocations": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Predeclared paired initialization seeds, held-speaker folds and input/memory allocations. These define the comparison rather than being tuned for a high score.",
+      "value": [
+        [
+          4,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          6
+        ]
+      ]
+    },
+    "anchors.crc.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Common fixed CRC dynamics across allocations. Tuned dynamics are selected separately; this anchor is not an experimentally established optimum.",
+      "value": 0.9
+    },
+    "anchors.crc.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Common fixed CRC dynamics across allocations. Tuned dynamics are selected separately; this anchor is not an experimentally established optimum.",
+      "value": 0.03
+    },
+    "anchors.crc.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Common fixed CRC dynamics across allocations. Tuned dynamics are selected separately; this anchor is not an experimentally established optimum.",
+      "value": 20
+    },
+    "data.dvs.bin_us": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": 50000
+    },
+    "data.dvs.confirmation_groups": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "data.dvs.grid": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": 8
+    },
+    "data.shd.bin_us": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": 10000
+    },
+    "data.shd.channels": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": 32
+    },
+    "data.shd.confirmation_groups": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": [
+        0,
+        1
+      ]
+    },
+    "data.shd.duration_us": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Hold event representation and existing subject partitions fixed across models. Full clips and valid bins are preserved; this is not an exhaustive preprocessing optimum.",
+      "value": 1400000
+    },
+    "datasets.dvs.adapter": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": "pca"
+    },
+    "datasets.dvs.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": 3
+    },
+    "datasets.dvs.segments": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": 4
+    },
+    "datasets.shd.adapter": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": "pooling"
+    },
+    "datasets.shd.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": 1
+    },
+    "datasets.shd.segments": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Preserve the aligned dataset-specific adapter, fixed depth and common summary. Mapping comparisons diagnose these choices without automatically changing the core study.",
+      "value": 8
+    },
+    "execution.cpu_threads": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 4
+    },
+    "execution.crc_batch": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 128
+    },
+    "execution.crc_device": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": "cpu"
+    },
+    "execution.crc_graphs": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": false
+    },
+    "execution.device": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": "cuda"
+    },
+    "execution.gpu_threads": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 1
+    },
+    "execution.job_seconds": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 120
+    },
+    "execution.memory_fraction": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 0.75
+    },
+    "execution.qrc_large": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": "GPU"
+    },
+    "execution.qrc_small": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": "CPU"
+    },
+    "execution.quantum_batch": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit laptop execution policy; backend changes require agreement checks and independent timing. Worker count and batches do not establish a hardware advantage.",
+      "value": 1
+    },
+    "folds": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Predeclared paired initialization seeds, held-speaker folds and input/memory allocations. These define the comparison rather than being tuned for a high score.",
+      "value": [
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          10
+        ]
+      ]
+    },
+    "method.classical_precision": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "float64"
+    },
+    "method.crc_sparsity": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc",
+          "large-crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.5
+    },
+    "method.encoding": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "amplitude-probabilities"
+    },
+    "method.entanglement": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "cz-ring"
+    },
+    "method.input_transform": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "log1p"
+    },
+    "method.lsqr_iterations": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": [
+        1000,
+        5000
+      ]
+    },
+    "method.lsqr_tolerance": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.001
+    },
+    "method.observables": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": [
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "method.probability_gain": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.5
+    },
+    "method.projection_seed": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 42
+    },
+    "method.quantum_precision": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "complex128"
+    },
+    "method.reset": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "partial"
+    },
+    "method.standardization": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "training-only"
+    },
+    "method.summary": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "segment_mean_std_final"
+    },
+    "method.summary_ddof": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0
+    },
+    "method.uploads": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 1
+    },
+    "method.virtual_nodes": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 1
+    },
+    "neural.lstm.betas": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit Adamax implementation/default setting preserved from the reference implementation. The paper supports the optimizer family; its exact numerical defaults have not been independently attributed here.",
+      "value": [
+        0.9,
+        0.999
+      ]
+    },
+    "neural.lstm.epsilon": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit Adamax implementation/default setting preserved from the reference implementation. The paper supports the optimizer family; its exact numerical defaults have not been independently attributed here.",
+      "value": 1e-07
+    },
+    "neural.lstm.hidden_size": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "departures": "Compressed inputs, PyTorch initialization, valid-length handling and stopping differ. Output dropout replaces recurrent dropout.",
+      "evidence": [],
+      "location": "Appendix B.2, LSTM networks",
+      "origins": [
+        "literature-informed"
+      ],
+      "rationale": "Paper-informed LSTM architecture; the value is reported by the reference, not shown optimal for our representation.",
+      "reference": "https://arxiv.org/html/1910.07407v3",
+      "value": 128
+    },
+    "neural.lstm.input_dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "departures": "Compressed inputs, PyTorch initialization, valid-length handling and stopping differ. Output dropout replaces recurrent dropout.",
+      "evidence": [],
+      "location": "Appendix B.2, LSTM networks",
+      "origins": [
+        "literature-informed"
+      ],
+      "rationale": "Paper-informed LSTM architecture; the value is reported by the reference, not shown optimal for our representation.",
+      "reference": "https://arxiv.org/html/1910.07407v3",
+      "value": 0.2
+    },
+    "neural.lstm.learning_rate": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit Adamax implementation/default setting preserved from the reference implementation. The paper supports the optimizer family; its exact numerical defaults have not been independently attributed here.",
+      "value": 0.002
+    },
+    "neural.lstm.output_dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Output dropout replaces the reference paper recurrent dropout to retain fused LSTM execution. Equal probability does not make the implementations equivalent.",
+      "value": 0.2
+    },
+    "neural.lstm.weight_decay": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Explicit Adamax implementation/default setting preserved from the reference implementation. The paper supports the optimizer family; its exact numerical defaults have not been independently attributed here.",
+      "value": 0.0
+    },
+    "neural.transformer.dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 0.1
+    },
+    "neural.transformer.feedforward_size": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 128
+    },
+    "neural.transformer.heads": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 4
+    },
+    "neural.transformer.layers": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 2
+    },
+    "neural.transformer.learning_rate": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 0.001
+    },
+    "neural.transformer.weight_decay": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 0.01
+    },
+    "neural.transformer.width": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Compact practical temporal reference constrained by laptop compute. No source is claimed to establish these exact dimensions or optimizer values as optimal.",
+      "value": 64
+    },
+    "neural_recipes.lstm.dropout.input_dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.4
+    },
+    "neural_recipes.lstm.dropout.output_dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.4
+    },
+    "neural_recipes.lstm.regularization.weight_decay": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.0001
+    },
+    "neural_recipes.transformer.dropout.dropout": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.3
+    },
+    "neural_recipes.transformer.regularization.weight_decay": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 0.1
+    },
+    "profiles.core": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": [
+        "comparison",
+        "generalization"
+      ]
+    },
+    "profiles.thesis": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": [
+        "comparison",
+        "mapping",
+        "observations",
+        "recurrence",
+        "generalization",
+        "learning-curves"
+      ]
+    },
+    "readout.lambdas": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection",
+          "large-crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Common development-only readout/search procedure. Alpha equals training sample count times lambda; solver precision is held fixed within each controlled comparison. Equivalence and gain bands are operational conventions, not significance thresholds.",
+      "value": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ]
+    },
+    "readout.solver": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection",
+          "large-crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Common development-only readout/search procedure. Alpha equals training sample count times lambda; solver precision is held fixed within each controlled comparison. Equivalence and gain bands are operational conventions, not significance thresholds.",
+      "value": "cholesky"
+    },
+    "search.depths": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default",
+        "development-selected"
+      ],
+      "rationale": "Finite declared dynamics range chosen to probe weak/strong input and retention within laptop compute limits. The range itself was not selected by test performance.",
+      "value": [
+        1,
+        2,
+        3
+      ]
+    },
+    "search.radii": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default",
+        "development-selected"
+      ],
+      "rationale": "Finite declared dynamics range chosen to probe weak/strong input and retention within laptop compute limits. The range itself was not selected by test performance.",
+      "value": [
+        0.5,
+        0.9
+      ]
+    },
+    "search.scales": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default",
+        "development-selected"
+      ],
+      "rationale": "Finite declared dynamics range chosen to probe weak/strong input and retention within laptop compute limits. The range itself was not selected by test performance.",
+      "value": [
+        0.03,
+        0.1,
+        1.0
+      ]
+    },
+    "search.timescales_ms": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default",
+        "development-selected"
+      ],
+      "rationale": "Finite declared dynamics range chosen to probe weak/strong input and retention within laptop compute limits. The range itself was not selected by test performance.",
+      "value": [
+        20,
+        60,
+        200
+      ]
+    },
+    "seeds": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Predeclared paired initialization seeds, held-speaker folds and input/memory allocations. These define the comparison rather than being tuned for a high score.",
+      "value": [
+        42,
+        44,
+        46
+      ]
+    },
+    "selection.equivalence": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Common development-only readout/search procedure. Alpha equals training sample count times lambda; solver precision is held fixed within each controlled comparison. Equivalence and gain bands are operational conventions, not significance thresholds.",
+      "value": 0.005
+    },
+    "selection.positive_folds": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Common development-only readout/search procedure. Alpha equals training sample count times lambda; solver precision is held fixed within each controlled comparison. Equivalence and gain bands are operational conventions, not significance thresholds.",
+      "value": 3
+    },
+    "selection.supported_gain": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "Common development-only readout/search procedure. Alpha equals training sample count times lambda; solver precision is held fixed within each controlled comparison. Equivalence and gain bands are operational conventions, not significance thresholds.",
+      "value": 0.01
+    },
+    "supporting.learning_sizes": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "large-crc",
+          "projection",
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": [
+        600,
+        2000
+      ]
+    },
+    "supporting.mapping.anchors.dvs.crc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 2
+    },
+    "supporting.mapping.anchors.dvs.crc2.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "crc"
+    },
+    "supporting.mapping.anchors.dvs.crc2.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.9
+    },
+    "supporting.mapping.anchors.dvs.crc2.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.03
+    },
+    "supporting.mapping.anchors.dvs.crc2.segments": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.crc2.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 18
+    },
+    "supporting.mapping.anchors.dvs.crc2.summary": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.dvs.crc2.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 20
+    },
+    "supporting.mapping.anchors.dvs.crc2.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.dvs.crc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.crc4.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "crc"
+    },
+    "supporting.mapping.anchors.dvs.crc4.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.9
+    },
+    "supporting.mapping.anchors.dvs.crc4.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.03
+    },
+    "supporting.mapping.anchors.dvs.crc4.segments": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.crc4.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 18
+    },
+    "supporting.mapping.anchors.dvs.crc4.summary": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.dvs.crc4.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 20
+    },
+    "supporting.mapping.anchors.dvs.crc4.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.dvs.qrc2.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 1
+    },
+    "supporting.mapping.anchors.dvs.qrc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 2
+    },
+    "supporting.mapping.anchors.dvs.qrc2.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "qrc"
+    },
+    "supporting.mapping.anchors.dvs.qrc2.qubits": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 6
+    },
+    "supporting.mapping.anchors.dvs.qrc2.segments": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.qrc2.summary": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.dvs.qrc2.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.dvs.qrc4.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 1
+    },
+    "supporting.mapping.anchors.dvs.qrc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.qrc4.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "qrc"
+    },
+    "supporting.mapping.anchors.dvs.qrc4.qubits": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 6
+    },
+    "supporting.mapping.anchors.dvs.qrc4.segments": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.dvs.qrc4.summary": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.dvs.qrc4.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.shd.crc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 2
+    },
+    "supporting.mapping.anchors.shd.crc2.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "crc"
+    },
+    "supporting.mapping.anchors.shd.crc2.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.9
+    },
+    "supporting.mapping.anchors.shd.crc2.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.03
+    },
+    "supporting.mapping.anchors.shd.crc2.segments": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 8
+    },
+    "supporting.mapping.anchors.shd.crc2.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 18
+    },
+    "supporting.mapping.anchors.shd.crc2.summary": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.shd.crc2.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 20
+    },
+    "supporting.mapping.anchors.shd.crc2.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.shd.crc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.shd.crc4.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "crc"
+    },
+    "supporting.mapping.anchors.shd.crc4.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.9
+    },
+    "supporting.mapping.anchors.shd.crc4.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 0.03
+    },
+    "supporting.mapping.anchors.shd.crc4.segments": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 8
+    },
+    "supporting.mapping.anchors.shd.crc4.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 18
+    },
+    "supporting.mapping.anchors.shd.crc4.summary": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.shd.crc4.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 20
+    },
+    "supporting.mapping.anchors.shd.crc4.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.shd.qrc2.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 1
+    },
+    "supporting.mapping.anchors.shd.qrc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 2
+    },
+    "supporting.mapping.anchors.shd.qrc2.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "qrc"
+    },
+    "supporting.mapping.anchors.shd.qrc2.qubits": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 6
+    },
+    "supporting.mapping.anchors.shd.qrc2.segments": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 8
+    },
+    "supporting.mapping.anchors.shd.qrc2.summary": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.shd.qrc2.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.anchors.shd.qrc4.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 1
+    },
+    "supporting.mapping.anchors.shd.qrc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 4
+    },
+    "supporting.mapping.anchors.shd.qrc4.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "qrc"
+    },
+    "supporting.mapping.anchors.shd.qrc4.qubits": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 6
+    },
+    "supporting.mapping.anchors.shd.qrc4.segments": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": 8
+    },
+    "supporting.mapping.anchors.shd.qrc4.summary": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "segment_mean_std_final"
+    },
+    "supporting.mapping.anchors.shd.qrc4.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": "all"
+    },
+    "supporting.mapping.modes": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": [
+        "legacy",
+        "orthogonal",
+        "pooling",
+        "pca"
+      ]
+    },
+    "supporting.mapping.projection_seeds": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": [
+        42,
+        44,
+        46
+      ]
+    },
+    "supporting.mapping.widths": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc",
+          "projection"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Preserve the finite mapping comparison, pre-mapping dynamics and separate projection-seed variation. The core adapter is held fixed.",
+      "value": [
+        2,
+        4
+      ]
+    },
+    "supporting.observations.dvs.crc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 2
+    },
+    "supporting.observations.dvs.crc2.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.observations.dvs.crc2.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.5
+    },
+    "supporting.observations.dvs.crc2.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.1
+    },
+    "supporting.observations.dvs.crc2.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.observations.dvs.crc2.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 20
+    },
+    "supporting.observations.dvs.crc2.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.dvs.crc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.observations.dvs.crc4.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.observations.dvs.crc4.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.9
+    },
+    "supporting.observations.dvs.crc4.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 1.0
+    },
+    "supporting.observations.dvs.crc4.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.observations.dvs.crc4.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 60
+    },
+    "supporting.observations.dvs.crc4.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.dvs.qrc2.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 3
+    },
+    "supporting.observations.dvs.qrc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 2
+    },
+    "supporting.observations.dvs.qrc2.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.observations.dvs.qrc2.qubits": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.observations.dvs.qrc2.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.dvs.qrc4.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 3
+    },
+    "supporting.observations.dvs.qrc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.observations.dvs.qrc4.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.observations.dvs.qrc4.qubits": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.observations.dvs.qrc4.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.shd.crc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 2
+    },
+    "supporting.observations.shd.crc2.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.observations.shd.crc2.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.9
+    },
+    "supporting.observations.shd.crc2.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.03
+    },
+    "supporting.observations.shd.crc2.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.observations.shd.crc2.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 20
+    },
+    "supporting.observations.shd.crc2.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.shd.crc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.observations.shd.crc4.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.observations.shd.crc4.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.9
+    },
+    "supporting.observations.shd.crc4.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.03
+    },
+    "supporting.observations.shd.crc4.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.observations.shd.crc4.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 20
+    },
+    "supporting.observations.shd.crc4.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.shd.qrc2.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 1
+    },
+    "supporting.observations.shd.qrc2.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 2
+    },
+    "supporting.observations.shd.qrc2.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.observations.shd.qrc2.qubits": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.observations.shd.qrc2.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.observations.shd.qrc4.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 1
+    },
+    "supporting.observations.shd.qrc4.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.observations.shd.qrc4.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.observations.shd.qrc4.qubits": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.observations.shd.qrc4.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.practical.dvs.large_crc.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 0.9
+    },
+    "supporting.practical.dvs.large_crc.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 0.03
+    },
+    "supporting.practical.dvs.large_crc.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 256
+    },
+    "supporting.practical.dvs.large_crc.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 20
+    },
+    "supporting.practical.shd.large_crc.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 0.9
+    },
+    "supporting.practical.shd.large_crc.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 0.03
+    },
+    "supporting.practical.shd.large_crc.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 256
+    },
+    "supporting.practical.shd.large_crc.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "large-crc"
+        ]
+      },
+      "evidence": [
+        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+      ],
+      "origins": [
+        "controlled-comparison",
+        "practical-default"
+      ],
+      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "value": 20
+    },
+    "supporting.preprocessing.max_epochs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 80
+    },
+    "supporting.preprocessing.patience": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 10
+    },
+    "supporting.preprocessing.representations.original_log.bin_us": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 10000
+    },
+    "supporting.preprocessing.representations.original_log.channels": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 32
+    },
+    "supporting.preprocessing.representations.original_log.values": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "log1p"
+    },
+    "supporting.preprocessing.representations.paper_counts.bin_us": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 10000
+    },
+    "supporting.preprocessing.representations.paper_counts.channels": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 700
+    },
+    "supporting.preprocessing.representations.paper_counts.values": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "count"
+    },
+    "supporting.preprocessing.representations.selected_log.bin_us": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 20000
+    },
+    "supporting.preprocessing.representations.selected_log.channels": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": 16
+    },
+    "supporting.preprocessing.representations.selected_log.values": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "lstm"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Preserved explicit study setting; not claimed to be task-optimal.",
+      "value": "log1p"
+    },
+    "supporting.recurrence.dvs.crc.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.recurrence.dvs.crc.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.recurrence.dvs.crc.radius": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.9
+    },
+    "supporting.recurrence.dvs.crc.scale": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 1.0
+    },
+    "supporting.recurrence.dvs.crc.size": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.recurrence.dvs.crc.tau": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 60
+    },
+    "supporting.recurrence.dvs.crc.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.recurrence.dvs.qrc.depth": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 3
+    },
+    "supporting.recurrence.dvs.qrc.inputs": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.recurrence.dvs.qrc.model": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.recurrence.dvs.qrc.qubits": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.recurrence.dvs.qrc.view": {
+      "applies_to": {
+        "datasets": [
+          "dvs"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.recurrence.shd.crc.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.recurrence.shd.crc.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "crc"
+    },
+    "supporting.recurrence.shd.crc.radius": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 0.5
+    },
+    "supporting.recurrence.shd.crc.scale": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 1.0
+    },
+    "supporting.recurrence.shd.crc.size": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 18
+    },
+    "supporting.recurrence.shd.crc.tau": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 20
+    },
+    "supporting.recurrence.shd.crc.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "supporting.recurrence.shd.qrc.depth": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 2
+    },
+    "supporting.recurrence.shd.qrc.inputs": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 4
+    },
+    "supporting.recurrence.shd.qrc.model": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "qrc"
+    },
+    "supporting.recurrence.shd.qrc.qubits": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": 6
+    },
+    "supporting.recurrence.shd.qrc.view": {
+      "applies_to": {
+        "datasets": [
+          "shd"
+        ],
+        "models": [
+          "qrc",
+          "crc"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "controlled-comparison"
+      ],
+      "rationale": "A fixed numerical intervention anchor, copied from the completed study. Hold dynamics constant while changing observations or state retention; no new optimum is claimed.",
+      "value": "all"
+    },
+    "training.batch_size": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 128
+    },
+    "training.cpu_threads": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 4
+    },
+    "training.gradient_clip": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 1.0
+    },
+    "training.max_epochs": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 120
+    },
+    "training.min_delta": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 0.001
+    },
+    "training.min_epochs": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 20
+    },
+    "training.patience": {
+      "applies_to": {
+        "datasets": [
+          "shd",
+          "dvs"
+        ],
+        "models": [
+          "lstm",
+          "transformer"
+        ]
+      },
+      "evidence": [],
+      "origins": [
+        "practical-default"
+      ],
+      "rationale": "Common finite stopping and optimization budget. Development macro-F1 controls early stopping; final duration is the rounded median selected best epoch.",
+      "value": 15
+    }
+  },
+  "schema": 1
+}

@@ -1,0 +1,32 @@
+# Preprocessing
+
+Classification scores use fractions. Figure captions identify the population and aggregation. Initialization variability and held-person variability are distinct; error bars are not significance tests.
+
+## Shared numerical tables
+
+These tables retain all topics. Filter by dataset, phase and role to inspect this topic.
+
+[performance.csv](../performance/tables/performance.csv)
+[performance-cells.csv](../performance/tables/performance-cells.csv)
+[paired-differences.csv](../comparisons/tables/paired-differences.csv)
+[paired-cells.csv](../comparisons/tables/paired-cells.csv)
+
+## Figures
+
+### `preprocessing-diagnostic-effects-1`
+
+[PNG](figures/preprocessing-diagnostic-effects-1.png) | [paired-differences.csv](../comparisons/tables/paired-differences.csv) | [Plot recipe](../overview/metadata/figures.json)
+
+Each row is an explicitly validated left-minus-right contrast. Bars show sample seed SD after averaging development folds within seeds. Datasets and phases are separate; no significance claim. Individual paired cells and fold consistency remain in the shared comparison tables.
+
+### `preprocessing-diagnostic-performance-1`
+
+[PNG](figures/preprocessing-diagnostic-performance-1.png) | [performance.csv](../performance/tables/performance.csv) | [Plot recipe](../overview/metadata/figures.json)
+
+Complete aggregate performance, with sample SD across initialization seeds where replication exists. Development folds are averaged within seeds; screening and robustness protocols remain separate. Blank positions are unavailable comparisons.
+
+### `shd-preprocessing-diagnostic-fitting-1`
+
+[PNG](figures/shd-preprocessing-diagnostic-fitting-1.png) | [epoch-history.csv](../practical/tables/epoch-history.csv) | [Plot recipe](../overview/metadata/figures.json)
+
+Each line is one actual fold/seed history, ending at its recorded stopping epoch. Green is training and orange validation. Epoch coverage changes are not averaged away. Configuration, selected epoch and stopping reason remain in the canonical history table.

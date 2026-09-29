@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+/data/*
+!/data/.gitkeep
+/environment/local/
+/output/*
+!/output/runs/
+/output/runs/*
+!/output/runs/*/
+/output/runs/*/*
+!/output/runs/*/reports/
+*.pyc
+.env

@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "source": {
+    "package": "qiskit-aer",
+    "version": "0.17.2",
+    "upstream_source_modifications": []
+  },
+  "platform": {
+    "os": "Ubuntu 24.04 x86_64",
+    "python": "3.11",
+    "cuda_release": "12.6.3",
+    "gpu_architecture": "8.6",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU"
+  },
+  "settings": {
+    "thrust_backend": "CUDA",
+    "cuquantum": false,
+    "conan": false,
+    "build_type": "Release",
+    "parallel_jobs": 2
+  },
+  "native_support": {
+    "json": "3.1.1",
+    "spdlog": "1.9.2",
+    "openblas": "0.3.26",
+    "spdlog_target_alias": "spdlog -> spdlog::spdlog",
+    "linker_fix": "OpenBLAS detection needs -rpath-link to the extracted Fortran runtime directory"
+  },
+  "downloads": [
+    {
+      "name": "cuda_nvcc-linux-x86_64-12.6.85-archive.tar.xz",
+      "url": "https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/linux-x86_64/cuda_nvcc-linux-x86_64-12.6.85-archive.tar.xz",
+      "sha256": "840deff234d9bef20d6856439c49881cb4f29423b214f9ecd2fa59b7ac323817"
+    },
+    {
+      "name": "cuda_cudart-linux-x86_64-12.6.77-archive.tar.xz",
+      "url": "https://developer.download.nvidia.com/compute/cuda/redist/cuda_cudart/linux-x86_64/cuda_cudart-linux-x86_64-12.6.77-archive.tar.xz",
+      "sha256": "f74689258a60fd9c5bdfa7679458527a55e22442691ba678dcfaeffbf4391ef9"
+    },
+    {
+      "name": "cuda_cccl-linux-x86_64-12.6.77-archive.tar.xz",
+      "url": "https://developer.download.nvidia.com/compute/cuda/redist/cuda_cccl/linux-x86_64/cuda_cccl-linux-x86_64-12.6.77-archive.tar.xz",
+      "sha256": "9c3145ef01f73e50c0f5fcf923f0899c847f487c529817daa8f8b1a3ecf20925"
+    },
+    {
+      "name": "libopenblas0-pthread_0.3.26+ds-1ubuntu0.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/o/openblas/libopenblas0-pthread_0.3.26+ds-1ubuntu0.1_amd64.deb",
+      "sha256": "7dc3b4384c02aecb87eb8b70fa26c5843a08af242f4638aa4b36922bdc4f5b04"
+    },
+    {
+      "name": "libopenblas-pthread-dev_0.3.26+ds-1ubuntu0.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/o/openblas/libopenblas-pthread-dev_0.3.26+ds-1ubuntu0.1_amd64.deb",
+      "sha256": "01ae4d0433927e4109ae614c047f9df55dc3c8515e6369423f36f5e18d59101e"
+    },
+    {
+      "name": "libgfortran5_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-14/libgfortran5_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+      "sha256": "2b05896c477275ad3473bb63a5ac5a5b8a7e4a6ad6ed7cb23c442ccd1abc28f5"
+    },
+    {
+      "name": "libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-14/libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+      "sha256": "dc8f0ca542e09d662f29370c8393c016440dd4bc5c996c5fcc19f632b63ce3b0"
+    },
+    {
+      "name": "json.tar.gz",
+      "url": "https://codeload.github.com/nlohmann/json/tar.gz/refs/tags/v3.1.1",
+      "sha256": "9f3549824af3ca7e9707a2503959886362801fb4926b869789d6929098a79e47"
+    },
+    {
+      "name": "spdlog.tar.gz",
+      "url": "https://codeload.github.com/gabime/spdlog/tar.gz/refs/tags/v1.9.2",
+      "sha256": "6fff9215f5cb81760be4cc16d033526d1080427d236e86d70bb02994f85e3d38"
+    },
+    {
+      "name": "qiskit_aer-0.17.2.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/07/6c/6b8b35f67159401580665c59ae64d676bef9e85aac4d2a50831cbe32f652/qiskit_aer-0.17.2.tar.gz",
+      "sha256": "134eef8e509311955a15be543d2ba368f988f3583a2bc1f548af3196da820eb4"
+    }
+  ],
+  "preserved_wheel": {
+    "qiskit_aer-0.17.2-cp311-cp311-linux_x86_64.whl": "4370e3949989b344d79448962ecbf61907da069ae7741294431f53be3a0e284d"
+  },
+  "rebuild_identity": "Matching source and settings, not a promise of byte-identical wheel output",
+  "procedure": "BUILD.md; python -m src.runtime.aer_build"
+}
