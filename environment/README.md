@@ -65,5 +65,3 @@ Pass the copy with `--config PATH`. The checked-in settings mix CPU and GPU back
 ## Local artifacts and reproducibility
 
 `local/wheels/` holds the Aer wheel; `local/native/` holds its required native runtime. The optional `local/build/` holds downloaded sources, the build environment and temporary compiler products. It can be removed after successful installation and runtime verification. All of `local/` is Git-ignored, so a clone requires rebuilding or separately restoring the native artifacts.
-
-The pinned recipes distinguish runtime dependencies from compilation tools. They are specific to the documented platform, not universal cross-platform lock files. The original verbose inventories were moved out of the active environment interface; the cleanup record preserves the transition and validation evidence under `keeping-track/environment-cleanup/`.

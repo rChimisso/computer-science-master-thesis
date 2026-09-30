@@ -4,8 +4,8 @@ Use the `qrc-spiking` environment and run commands from the repository root. The
 
 | Scope | Purpose | Test methods |
 |---|---|---:|
-| `quick/` | Scientific arithmetic, data isolation, selection, evidence validity and bounded execution checks | \(24\) |
-| `extended/` | Complete synthetic workflows, device integration, interruption recovery and offline reports | \(16\) |
+| `quick/` | Scientific arithmetic, data isolation, selection, evidence validity and bounded execution checks | $24$ |
+| `extended/` | Complete synthetic workflows, device integration, interruption recovery and offline reports | $16$ |
 
 Related invalid-input cases share named subtests. A failed subtest identifies its scenario; the method count does not represent the number of assertions.
 
@@ -50,7 +50,7 @@ Without `--gpu`, child processes hide CUDA devices. With it, device preflight re
 | `support.py` | Shared synthetic data, compact evidence and frozen-run setup; no test methods |
 | `extended/lifecycle_fixture.py` | Subprocess helper for real coordinator lifecycle checks; no saved data |
 
-All evaluation inputs are synthetic. No real official-test data are loaded. Device tolerances remain unchanged, including the quantum absolute tolerance of \(10^{-10}\).
+All evaluation inputs are synthetic. No real official-test data are loaded. Device tolerances remain unchanged, including the quantum absolute tolerance of $10^{-10}$.
 
 The suite deliberately omits detailed terminal/ETA behavior, scheduling fairness, plot layout, PDF/filter permutations and environment-build edge cases. It also omits dedicated invalid run-name and archive-traversal checks. Production safeguards remain in place; removing their tests reduces coverage. Mapping figure tests retain numerical source and seed semantics, rather than exact labels or layout.
 
@@ -64,7 +64,7 @@ Observed laptop timings during cleanup:
 
 | Scope | Process duration |
 |---|---:|
-| Quick suite | Approximately \(55\)-\(57\) seconds |
-| Integration suite with GPU checks enabled | Approximately \(490\) seconds, or \(8.2\) minutes |
+| Quick suite | Approximately $55$-$57$ seconds |
+| Integration suite with GPU checks enabled | Approximately $490$ seconds, or $8.2$ minutes |
 
-Allow about \(10\) minutes for the full GPU-enabled command, including device preflight. These are indicative correctness-check timings, not model resource benchmarks; competing work and hardware affect them. Planning ranges from `--list` are conservative allowances, not fresh measurements. Test counts do not predict runtime: full-sequence and subprocess checks remain intentionally substantive.
+Allow about $10$ minutes for the full GPU-enabled command, including device preflight. These are indicative correctness-check timings, not model resource benchmarks; competing work and hardware affect them. Planning ranges from `--list` are conservative allowances, not fresh measurements. Test counts do not predict runtime: full-sequence and subprocess checks remain intentionally substantive.

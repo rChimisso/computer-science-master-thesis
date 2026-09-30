@@ -3806,13 +3806,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. DVS transfers this setting from SHD; no DVS-specific dynamics optimum is claimed. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 0.9
     },
     "supporting.practical.dvs.large_crc.scale": {
@@ -3825,13 +3825,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. DVS transfers this setting from SHD; no DVS-specific dynamics optimum is claimed. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 0.03
     },
     "supporting.practical.dvs.large_crc.size": {
@@ -3844,13 +3844,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed 256-unit practical reference receiving the richer retained input stream. The historical SHD calibration held this size constant; it supplies no size-optimization evidence. The exact size is a practical computational choice, not a verified literature-derived optimum.",
       "value": 256
     },
     "supporting.practical.dvs.large_crc.tau": {
@@ -3863,13 +3863,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/dvs/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. DVS transfers this setting from SHD; no DVS-specific dynamics optimum is claimed. Discrete leak is derived as 1 - exp(-bin_width_ms / timescale_ms), so the same physical timescale implies different SHD/DVS leaks. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 20
     },
     "supporting.practical.shd.large_crc.radius": {
@@ -3882,13 +3882,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. That earlier holdout differs from current inner-fold selection. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 0.9
     },
     "supporting.practical.shd.large_crc.scale": {
@@ -3901,13 +3901,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. That earlier holdout differs from current inner-fold selection. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 0.03
     },
     "supporting.practical.shd.large_crc.size": {
@@ -3920,13 +3920,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed 256-unit practical reference receiving the richer retained input stream. The historical SHD calibration held this size constant; it supplies no size-optimization evidence. The exact size is a practical computational choice, not a verified literature-derived optimum.",
       "value": 256
     },
     "supporting.practical.shd.large_crc.tau": {
@@ -3939,13 +3939,13 @@
         ]
       },
       "evidence": [
-        "keeping-track/reference/thesis/methodology/evidence/shd/fixed-selection.json"
+        "#/supporting_evidence/laptop_crc_calibration"
       ],
       "origins": [
         "controlled-comparison",
         "practical-default"
       ],
-      "rationale": "Fixed practical-reference architecture or dynamics; no search over this exact setting is claimed.",
+      "rationale": "Fixed practical-reference dynamics with historical support from the bounded SHD speaker-0/1 calibration recorded in supporting_evidence.laptop_crc_calibration. The current study does not retune this setting for the practical CRC. That earlier holdout differs from current inner-fold selection. Discrete leak is derived as 1 - exp(-bin_width_ms / timescale_ms), so the same physical timescale implies different SHD/DVS leaks. The original candidate range was a practical choice; boundary selection is not evidence of a global optimum.",
       "value": 20
     },
     "supporting.preprocessing.max_epochs": {
@@ -4657,5 +4657,2668 @@
       "value": 15
     }
   },
-  "schema": 1
+  "schema": 1,
+  "supporting_evidence": {
+    "laptop_crc_calibration": {
+      "purpose": "Historical origin of fixed practical CRC dynamics, not a new selection for the current protocol or DVS.",
+      "source_record_sha256": "51534ce8cc0ad1c0ff66afd7fc6e8743077ff8b39f500a03e1a910cfe20b2bec",
+      "source_record_id": "lstm-reference-study/crc/original_log/summary.json",
+      "protocol": {
+        "dataset": "SHD official training only",
+        "training_speakers": [
+          2,
+          3,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "validation_speakers": [
+          0,
+          1
+        ],
+        "training_samples": 6340,
+        "validation_samples": 1816,
+        "channels": 32,
+        "bin_ms": 10,
+        "values": "log1p",
+        "duration_seconds": 1.4,
+        "reservoir_size": 256,
+        "sparsity": 0.5,
+        "summary": "eight segment means, population standard deviations, final state",
+        "selection_seed": 42,
+        "replication_seeds": [
+          44,
+          46
+        ],
+        "official_test_evaluated": false
+      },
+      "candidates": {
+        "radius": [
+          0.5,
+          0.9
+        ],
+        "input_scale": [
+          0.03,
+          0.1
+        ],
+        "timescale_ms": [
+          20,
+          60,
+          200
+        ],
+        "alpha": [
+          0.1,
+          1,
+          10
+        ]
+      },
+      "selection_rule": "Validation macro-F1, accuracy, smaller input scale, smaller radius; remaining iteration order is not evidence of scientific superiority.",
+      "selected": {
+        "alpha": 1.0,
+        "input_scale": 0.03,
+        "leak": 0.3934693402873666,
+        "radius": 0.9,
+        "timescale_ms": 20
+      },
+      "screen": [
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            117,
+            101,
+            115,
+            109,
+            93,
+            99,
+            100,
+            100,
+            124,
+            102,
+            111,
+            126,
+            116,
+            101,
+            112,
+            111,
+            109,
+            117,
+            115,
+            111
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9995268138801262,
+            "macro_f1": 0.9995335088133219
+          },
+          "validation": {
+            "accuracy": 0.6134361233480177,
+            "macro_f1": 0.6227733496595544
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "31e7cc38582ad56722b0226e6a0d497ba238b8a71835af93743bfee8808d87c8"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            117,
+            101,
+            115,
+            109,
+            93,
+            99,
+            100,
+            100,
+            114,
+            102,
+            111,
+            122,
+            116,
+            101,
+            112,
+            111,
+            109,
+            117,
+            115,
+            111
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9995268138801262,
+            "macro_f1": 0.9995335088133219
+          },
+          "validation": {
+            "accuracy": 0.6134361233480177,
+            "macro_f1": 0.6227337171667326
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "31e7cc38582ad56722b0226e6a0d497ba238b8a71835af93743bfee8808d87c8"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            111,
+            92,
+            105,
+            100,
+            91,
+            92,
+            100,
+            98,
+            104,
+            92,
+            99,
+            114,
+            97,
+            92,
+            92,
+            93,
+            94,
+            97,
+            108,
+            92
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9995268138801262,
+            "macro_f1": 0.9995335088133219
+          },
+          "validation": {
+            "accuracy": 0.6205947136563876,
+            "macro_f1": 0.6302821704487533
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "31e7cc38582ad56722b0226e6a0d497ba238b8a71835af93743bfee8808d87c8"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            100,
+            105,
+            108,
+            101,
+            98,
+            96,
+            95,
+            102,
+            106,
+            106,
+            104,
+            112,
+            111,
+            106,
+            103,
+            105,
+            106,
+            105,
+            104,
+            98
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.999211356466877,
+            "macro_f1": 0.999215958590983
+          },
+          "validation": {
+            "accuracy": 0.6068281938325991,
+            "macro_f1": 0.6229925058593485
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "e9b504b57eebfaa73aebb7da37438a9d6f99635b404d7829167d6149e76f3b50"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            100,
+            105,
+            108,
+            101,
+            98,
+            96,
+            95,
+            102,
+            106,
+            106,
+            104,
+            112,
+            110,
+            106,
+            103,
+            105,
+            106,
+            105,
+            104,
+            98
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.999211356466877,
+            "macro_f1": 0.999215958590983
+          },
+          "validation": {
+            "accuracy": 0.6068281938325991,
+            "macro_f1": 0.6229925058593485
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "e9b504b57eebfaa73aebb7da37438a9d6f99635b404d7829167d6149e76f3b50"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            96,
+            95,
+            95,
+            87,
+            95,
+            88,
+            95,
+            102,
+            100,
+            91,
+            95,
+            105,
+            98,
+            95,
+            87,
+            87,
+            91,
+            105,
+            97,
+            88
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9990536277602524,
+            "macro_f1": 0.9990601521841336
+          },
+          "validation": {
+            "accuracy": 0.6150881057268722,
+            "macro_f1": 0.6299606583582593
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "e9b504b57eebfaa73aebb7da37438a9d6f99635b404d7829167d6149e76f3b50"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            92,
+            94,
+            94,
+            94,
+            89,
+            93,
+            95,
+            110,
+            104,
+            105,
+            89,
+            110,
+            94,
+            91,
+            93,
+            88,
+            105,
+            94,
+            110,
+            94
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.998422712933754,
+            "macro_f1": 0.998432010375723
+          },
+          "validation": {
+            "accuracy": 0.6040748898678414,
+            "macro_f1": 0.6211005874100466
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "32b5a5c64c5925428a03064b5d8049f268ad7a45050e7bc2247d0cb604f3f164"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            92,
+            94,
+            94,
+            94,
+            89,
+            93,
+            95,
+            110,
+            104,
+            105,
+            89,
+            110,
+            94,
+            91,
+            93,
+            88,
+            105,
+            94,
+            110,
+            94
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.998422712933754,
+            "macro_f1": 0.998432010375723
+          },
+          "validation": {
+            "accuracy": 0.6040748898678414,
+            "macro_f1": 0.6210425328354239
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "32b5a5c64c5925428a03064b5d8049f268ad7a45050e7bc2247d0cb604f3f164"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            89,
+            94,
+            93,
+            79,
+            87,
+            85,
+            95,
+            93,
+            85,
+            91,
+            88,
+            100,
+            89,
+            85,
+            93,
+            88,
+            87,
+            93,
+            98,
+            87
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9976340694006309,
+            "macro_f1": 0.997651623904131
+          },
+          "validation": {
+            "accuracy": 0.6095814977973568,
+            "macro_f1": 0.6276724122607685
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "32b5a5c64c5925428a03064b5d8049f268ad7a45050e7bc2247d0cb604f3f164"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            128,
+            123,
+            127,
+            128,
+            130,
+            130,
+            130,
+            133,
+            123,
+            127,
+            131,
+            125,
+            131,
+            130,
+            126,
+            127,
+            126,
+            124,
+            119,
+            129
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998426797865788
+          },
+          "validation": {
+            "accuracy": 0.6029735682819384,
+            "macro_f1": 0.6115670931482464
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "20361621e8b7143b4d225977b6169e3d21090dcab1c1ddaf5ad374796793e22d"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            128,
+            124,
+            128,
+            129,
+            130,
+            131,
+            130,
+            134,
+            123,
+            128,
+            131,
+            126,
+            131,
+            131,
+            128,
+            127,
+            126,
+            124,
+            121,
+            130
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998426797865788
+          },
+          "validation": {
+            "accuracy": 0.6040748898678414,
+            "macro_f1": 0.6124649287599571
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "20361621e8b7143b4d225977b6169e3d21090dcab1c1ddaf5ad374796793e22d"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            121,
+            119,
+            116,
+            116,
+            116,
+            116,
+            116,
+            121,
+            117,
+            120,
+            122,
+            130,
+            111,
+            113,
+            114,
+            116,
+            111,
+            117,
+            129,
+            124
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998426797865788
+          },
+          "validation": {
+            "accuracy": 0.6084801762114538,
+            "macro_f1": 0.6158021518102549
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "20361621e8b7143b4d225977b6169e3d21090dcab1c1ddaf5ad374796793e22d"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            119,
+            120,
+            119,
+            121,
+            123,
+            121,
+            123,
+            119,
+            114,
+            121,
+            107,
+            114,
+            118,
+            120,
+            123,
+            119,
+            122,
+            118,
+            110,
+            123
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9993690851735015,
+            "macro_f1": 0.9993690982885874
+          },
+          "validation": {
+            "accuracy": 0.6216960352422908,
+            "macro_f1": 0.6349712906241098
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "475382b0050f1fae1c10817464af4f453a448ce1542eea3563e40937645c539b"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            119,
+            121,
+            119,
+            113,
+            123,
+            121,
+            116,
+            121,
+            116,
+            122,
+            107,
+            114,
+            114,
+            122,
+            124,
+            106,
+            123,
+            118,
+            111,
+            118
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9993690851735015,
+            "macro_f1": 0.9993690982885874
+          },
+          "validation": {
+            "accuracy": 0.626101321585903,
+            "macro_f1": 0.6400957241723573
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "475382b0050f1fae1c10817464af4f453a448ce1542eea3563e40937645c539b"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            118,
+            107,
+            107,
+            106,
+            112,
+            106,
+            97,
+            112,
+            112,
+            109,
+            106,
+            119,
+            111,
+            98,
+            110,
+            97,
+            104,
+            100,
+            110,
+            97
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9990536277602524,
+            "macro_f1": 0.9990601521841336
+          },
+          "validation": {
+            "accuracy": 0.625,
+            "macro_f1": 0.6394352645040149
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "475382b0050f1fae1c10817464af4f453a448ce1542eea3563e40937645c539b"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            113,
+            113,
+            100,
+            106,
+            101,
+            101,
+            109,
+            104,
+            107,
+            110,
+            102,
+            102,
+            106,
+            112,
+            100,
+            101,
+            112,
+            109,
+            103,
+            109
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9993690851735015,
+            "macro_f1": 0.99937805413751
+          },
+          "validation": {
+            "accuracy": 0.6145374449339207,
+            "macro_f1": 0.6285810064277954
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "de77ef644df6d7c32904fbb28abb06a2a540b57cc5037f5e9c185f6b80d96d9f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            114,
+            113,
+            100,
+            106,
+            101,
+            101,
+            109,
+            104,
+            107,
+            110,
+            102,
+            102,
+            106,
+            110,
+            100,
+            101,
+            112,
+            103,
+            104,
+            109
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9993690851735015,
+            "macro_f1": 0.99937805413751
+          },
+          "validation": {
+            "accuracy": 0.6150881057268722,
+            "macro_f1": 0.6292117251707297
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "de77ef644df6d7c32904fbb28abb06a2a540b57cc5037f5e9c185f6b80d96d9f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.5,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            108,
+            100,
+            93,
+            89,
+            92,
+            93,
+            101,
+            92,
+            93,
+            84,
+            96,
+            98,
+            92,
+            93,
+            91,
+            94,
+            97,
+            93,
+            102,
+            103
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.9989091322374071
+          },
+          "validation": {
+            "accuracy": 0.6227973568281938,
+            "macro_f1": 0.6357251706975873
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.5,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "de77ef644df6d7c32904fbb28abb06a2a540b57cc5037f5e9c185f6b80d96d9f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            98,
+            99,
+            112,
+            112,
+            100,
+            103,
+            104,
+            103,
+            103,
+            99,
+            103,
+            97,
+            103,
+            100,
+            102,
+            94,
+            105,
+            114,
+            107,
+            96
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998439694559863
+          },
+          "validation": {
+            "accuracy": 0.6657488986784141,
+            "macro_f1": 0.6764364529998061
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "8defaa058902de22af3066096779d049ec45650757dc23a1c4b01e048f095a14"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            98,
+            99,
+            112,
+            112,
+            96,
+            103,
+            104,
+            103,
+            103,
+            99,
+            103,
+            97,
+            103,
+            100,
+            102,
+            94,
+            105,
+            114,
+            107,
+            96
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998439694559863
+          },
+          "validation": {
+            "accuracy": 0.6657488986784141,
+            "macro_f1": 0.6766933626480525
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "8defaa058902de22af3066096779d049ec45650757dc23a1c4b01e048f095a14"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            97,
+            96,
+            97,
+            89,
+            96,
+            96,
+            91,
+            95,
+            103,
+            98,
+            93,
+            97,
+            101,
+            95,
+            102,
+            91,
+            89,
+            91,
+            91,
+            91
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998439694559863
+          },
+          "validation": {
+            "accuracy": 0.663546255506608,
+            "macro_f1": 0.6741063101618974
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "8defaa058902de22af3066096779d049ec45650757dc23a1c4b01e048f095a14"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            96,
+            100,
+            103,
+            98,
+            97,
+            99,
+            98,
+            109,
+            108,
+            100,
+            101,
+            103,
+            106,
+            99,
+            109,
+            96,
+            104,
+            96,
+            104,
+            98
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.998903445898593
+          },
+          "validation": {
+            "accuracy": 0.6327092511013216,
+            "macro_f1": 0.6512152752139709
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "09253035ca8ba1ba225780bcf7d069e51e221889046fafb160cc3cfa8e10395f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            96,
+            100,
+            103,
+            98,
+            97,
+            98,
+            98,
+            109,
+            108,
+            100,
+            98,
+            103,
+            106,
+            99,
+            109,
+            96,
+            104,
+            96,
+            104,
+            98
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.998903445898593
+          },
+          "validation": {
+            "accuracy": 0.6332599118942731,
+            "macro_f1": 0.6517735373424257
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "09253035ca8ba1ba225780bcf7d069e51e221889046fafb160cc3cfa8e10395f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            92,
+            93,
+            98,
+            93,
+            96,
+            93,
+            92,
+            93,
+            100,
+            100,
+            93,
+            103,
+            92,
+            97,
+            92,
+            91,
+            95,
+            91,
+            95,
+            92
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.998903445898593
+          },
+          "validation": {
+            "accuracy": 0.6420704845814978,
+            "macro_f1": 0.6582991591615807
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "09253035ca8ba1ba225780bcf7d069e51e221889046fafb160cc3cfa8e10395f"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            100,
+            101,
+            102,
+            88,
+            88,
+            103,
+            104,
+            96,
+            94,
+            93,
+            97,
+            103,
+            104,
+            98,
+            93,
+            91,
+            100,
+            99,
+            107,
+            91
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.998904448320447
+          },
+          "validation": {
+            "accuracy": 0.6090308370044053,
+            "macro_f1": 0.6239014342091587
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "14b4e689141e1a865a49b3fd731075395152d60917fdb32ff83b0252db71d454"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            100,
+            101,
+            102,
+            88,
+            88,
+            103,
+            104,
+            96,
+            94,
+            93,
+            97,
+            99,
+            96,
+            98,
+            93,
+            91,
+            100,
+            99,
+            108,
+            91
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9988958990536277,
+            "macro_f1": 0.998904448320447
+          },
+          "validation": {
+            "accuracy": 0.6090308370044053,
+            "macro_f1": 0.6238859783397117
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "14b4e689141e1a865a49b3fd731075395152d60917fdb32ff83b0252db71d454"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            100,
+            88,
+            91,
+            88,
+            88,
+            89,
+            99,
+            90,
+            94,
+            88,
+            90,
+            93,
+            90,
+            82,
+            91,
+            90,
+            86,
+            99,
+            108,
+            87
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.998422712933754,
+            "macro_f1": 0.9984354016135002
+          },
+          "validation": {
+            "accuracy": 0.611784140969163,
+            "macro_f1": 0.6282458149680538
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "14b4e689141e1a865a49b3fd731075395152d60917fdb32ff83b0252db71d454"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            129,
+            121,
+            122,
+            123,
+            121,
+            122,
+            127,
+            124,
+            120,
+            119,
+            120,
+            122,
+            120,
+            127,
+            123,
+            120,
+            127,
+            119,
+            113,
+            121
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 1.0,
+            "macro_f1": 1.0
+          },
+          "validation": {
+            "accuracy": 0.6448237885462555,
+            "macro_f1": 0.6634466617620336
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "ec8bde0fd586b4f1d66e1ae3f01c68413831fa8db5f463b511f65114d1480e5a"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            129,
+            122,
+            124,
+            122,
+            121,
+            122,
+            127,
+            124,
+            121,
+            120,
+            120,
+            123,
+            120,
+            128,
+            123,
+            120,
+            127,
+            119,
+            114,
+            122
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 1.0,
+            "macro_f1": 1.0
+          },
+          "validation": {
+            "accuracy": 0.6453744493392071,
+            "macro_f1": 0.6642201088475362
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "ec8bde0fd586b4f1d66e1ae3f01c68413831fa8db5f463b511f65114d1480e5a"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            114,
+            107,
+            116,
+            115,
+            119,
+            117,
+            110,
+            118,
+            115,
+            112,
+            115,
+            112,
+            102,
+            117,
+            118,
+            112,
+            110,
+            103,
+            120,
+            116
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 1.0,
+            "macro_f1": 1.0
+          },
+          "validation": {
+            "accuracy": 0.6497797356828194,
+            "macro_f1": 0.6670483226774496
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "ec8bde0fd586b4f1d66e1ae3f01c68413831fa8db5f463b511f65114d1480e5a"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            112,
+            120,
+            111,
+            119,
+            113,
+            118,
+            118,
+            117,
+            113,
+            117,
+            113,
+            114,
+            118,
+            122,
+            120,
+            114,
+            112,
+            117,
+            110,
+            119
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998437190948405
+          },
+          "validation": {
+            "accuracy": 0.6541850220264317,
+            "macro_f1": 0.6685852340016613
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "7304275590e6e696a2746378da76f95f469ae40a3cdb1f498a9a239d359a8846"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            112,
+            120,
+            111,
+            119,
+            113,
+            118,
+            118,
+            117,
+            114,
+            119,
+            113,
+            116,
+            118,
+            123,
+            112,
+            114,
+            112,
+            119,
+            110,
+            119
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9996845425867508,
+            "macro_f1": 0.9996863988814193
+          },
+          "validation": {
+            "accuracy": 0.6558370044052864,
+            "macro_f1": 0.6702835841865087
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "7304275590e6e696a2746378da76f95f469ae40a3cdb1f498a9a239d359a8846"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 60,
+          "leak": 0.15351827510938593,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            98,
+            100,
+            110,
+            98,
+            98,
+            106,
+            101,
+            100,
+            108,
+            106,
+            98,
+            112,
+            104,
+            95,
+            112,
+            98,
+            107,
+            104,
+            117,
+            98
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9995268138801262,
+            "macro_f1": 0.9995301305546821
+          },
+          "validation": {
+            "accuracy": 0.6536343612334802,
+            "macro_f1": 0.6671197750175176
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.15351827510938593,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "7304275590e6e696a2746378da76f95f469ae40a3cdb1f498a9a239d359a8846"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 0.1,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            106,
+            109,
+            111,
+            110,
+            99,
+            98,
+            109,
+            104,
+            107,
+            106,
+            112,
+            105,
+            108,
+            108,
+            115,
+            108,
+            105,
+            109,
+            103,
+            107
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.999211356466877,
+            "macro_f1": 0.9992207557132147
+          },
+          "validation": {
+            "accuracy": 0.6426211453744494,
+            "macro_f1": 0.6587896388543726
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "0c9597b34289acf1e7fa41bf53f103c9fef342e43ef31625f905df3ca95e6d9a"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            106,
+            109,
+            112,
+            110,
+            99,
+            98,
+            109,
+            104,
+            108,
+            106,
+            112,
+            106,
+            108,
+            108,
+            115,
+            108,
+            105,
+            110,
+            103,
+            107
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.999211356466877,
+            "macro_f1": 0.9992207557132147
+          },
+          "validation": {
+            "accuracy": 0.6431718061674009,
+            "macro_f1": 0.6597135988023923
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "0c9597b34289acf1e7fa41bf53f103c9fef342e43ef31625f905df3ca95e6d9a"
+        },
+        {
+          "status": "completed",
+          "seed": 42,
+          "radius": 0.9,
+          "input_scale": 0.1,
+          "timescale_ms": 200,
+          "leak": 0.04877057549928599,
+          "alpha": 10.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            105,
+            92,
+            98,
+            92,
+            93,
+            98,
+            99,
+            104,
+            100,
+            90,
+            100,
+            98,
+            98,
+            97,
+            98,
+            94,
+            96,
+            98,
+            106,
+            102
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.999211356466877,
+            "macro_f1": 0.9992207557132147
+          },
+          "validation": {
+            "accuracy": 0.6387665198237885,
+            "macro_f1": 0.6554039867042704
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.1,
+              "leak_rate": 0.04877057549928599,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 42,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "0c9597b34289acf1e7fa41bf53f103c9fef342e43ef31625f905df3ca95e6d9a"
+        }
+      ],
+      "replications": [
+        {
+          "status": "completed",
+          "seed": 44,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            111,
+            112,
+            111,
+            109,
+            112,
+            111,
+            112,
+            100,
+            107,
+            108,
+            112,
+            113,
+            113,
+            106,
+            111,
+            113,
+            110,
+            108,
+            113,
+            105
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9998422712933754,
+            "macro_f1": 0.9998426797865788
+          },
+          "validation": {
+            "accuracy": 0.6475770925110133,
+            "macro_f1": 0.6558374323867772
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 44,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "042b17c33670292b938d9f9d6eff129d55038aa546bd77cb9773f8688a944484"
+        },
+        {
+          "status": "completed",
+          "seed": 46,
+          "radius": 0.9,
+          "input_scale": 0.03,
+          "timescale_ms": 20,
+          "leak": 0.3934693402873666,
+          "alpha": 1.0,
+          "solver": "lsqr",
+          "tolerance": 0.001,
+          "max_iterations": 1000,
+          "iterations_per_class": [
+            112,
+            98,
+            111,
+            103,
+            98,
+            98,
+            114,
+            110,
+            110,
+            105,
+            98,
+            116,
+            97,
+            98,
+            98,
+            96,
+            115,
+            98,
+            116,
+            94
+          ],
+          "iteration_limit_reached": false,
+          "feature_dimension": 4352,
+          "train": {
+            "accuracy": 0.9995268138801262,
+            "macro_f1": 0.9995297702975392
+          },
+          "validation": {
+            "accuracy": 0.6519823788546255,
+            "macro_f1": 0.6628643368460218
+          },
+          "feature_identity": {
+            "cache_fingerprint": "b78e1be256be5791b672a8150d15141dfa1e12cdb76208be14e13f9fcc5d0266",
+            "extractor_sha256": "7c81dbbba2617955c450fd7babfb588153070f7bc142ea42504689e6aa61f773",
+            "parameters": {
+              "input_scaling": 0.03,
+              "leak_rate": 0.3934693402873666,
+              "reservoir_size": 256,
+              "sparsity": 0.5,
+              "spectral_radius": 0.9,
+              "temporal_segments": 8
+            },
+            "representation": "original_log",
+            "reservoir_sha256": "158aa0aa800a222a7310723d000c02f05f2a9c88dfcaa969d5bd1c149abe796e",
+            "seed": 46,
+            "segments": 8,
+            "summary": "segment_mean_std_final",
+            "summary_sha256": "6f864e1e6a2a63353295412aa5a568f8b757b4457b0358166ce02f50bf11edcc",
+            "transform": {
+              "means": null,
+              "mode": "log1p",
+              "standard_deviations": null
+            }
+          },
+          "feature_fingerprint": "bd5754c291f8a0f587ff8ec48d2d0223a7d2403f1db6498d5362f92f4f770e20"
+        }
+      ],
+      "limits": [
+        "The reservoir size was fixed, not selected by this screen.",
+        "The selected radius is the upper grid boundary; scale and timescale are lower grid boundaries.",
+        "Exact numerical search bounds were practical choices, not independently established literature optima.",
+        "This was a single previously used speaker holdout and an LSQR readout, not current inner-fold Cholesky selection.",
+        "DVS reused the dynamics with its own bin-width-derived leak; no DVS-specific dynamics selection for this practical reference is established.",
+        "Current readout regularization and summary follow the current declared protocol, not the historical selected alpha."
+      ]
+    }
+  }
 }
