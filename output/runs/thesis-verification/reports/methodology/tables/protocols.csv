@@ -91,8 +91,8 @@ dvs,observations:qrc4:all,"{""depth"": 3, ""inputs"": 4, ""model"": ""qrc"", ""q
 dvs,observations:qrc4:products,"{""depth"": 3, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""solver"": ""lsqr"", ""view"": ""products""}",lsqr,development only
 dvs,observations:qrc4:zz,"{""depth"": 3, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""solver"": ""lsqr"", ""view"": ""zz""}",lsqr,development only
 dvs,practical:large-crc,"{""adapter"": ""identity"", ""inputs"": 0, ""model"": ""crc"", ""radius"": 0.9, ""scale"": 0.03, ""segments"": 4, ""size"": 256, ""solver"": ""lsqr"", ""summary"": ""segment_mean_std_final"", ""tau"": 20}",lsqr,development only
-dvs,practical:lstm,"{""fixed_epochs"": 72, ""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-dvs,practical:transformer,"{""fixed_epochs"": 38, ""model"": ""transformer"", ""recipe"": ""baseline""}",neural,development only
+dvs,practical:lstm,"{""fixed_epochs"": 72, ""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+dvs,practical:transformer,"{""fixed_epochs"": 38, ""model"": ""transformer"", ""recipe"": ""baseline""}",adamw,development only
 dvs,recurrence:crc:all,"{""inputs"": 4, ""model"": ""crc"", ""radius"": 0.9, ""reset"": ""all"", ""scale"": 1.0, ""size"": 18, ""tau"": 60, ""view"": ""all""}",cholesky,development only
 dvs,recurrence:crc:partial,"{""inputs"": 4, ""model"": ""crc"", ""radius"": 0.9, ""reset"": ""partial"", ""scale"": 1.0, ""size"": 18, ""tau"": 60, ""view"": ""all""}",cholesky,development only
 dvs,recurrence:qrc:all,"{""depth"": 3, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""reset"": ""all"", ""view"": ""all""}",cholesky,development only
@@ -206,22 +206,22 @@ shd,observations:qrc2:zz,"{""depth"": 1, ""inputs"": 2, ""model"": ""qrc"", ""qu
 shd,observations:qrc4:all,"{""depth"": 1, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""solver"": ""lsqr"", ""view"": ""all""}",lsqr,development only
 shd,observations:qrc4:products,"{""depth"": 1, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""solver"": ""lsqr"", ""view"": ""products""}",lsqr,development only
 shd,observations:qrc4:zz,"{""depth"": 1, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""solver"": ""lsqr"", ""view"": ""zz""}",lsqr,development only
-shd,original_log,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-shd,paper_counts,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
+shd,original_log,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+shd,paper_counts,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
 shd,practical:large-crc,"{""adapter"": ""identity"", ""inputs"": 0, ""model"": ""crc"", ""radius"": 0.9, ""scale"": 0.03, ""segments"": 4, ""size"": 256, ""solver"": ""lsqr"", ""summary"": ""segment_mean_std_final"", ""tau"": 20}",lsqr,development only
 shd,practical:large-crc:n=2000,"{""adapter"": ""identity"", ""inputs"": 0, ""model"": ""crc"", ""radius"": 0.9, ""scale"": 0.03, ""segments"": 4, ""size"": 256, ""solver"": ""lsqr"", ""summary"": ""segment_mean_std_final"", ""tau"": 20}",lsqr,development only
 shd,practical:large-crc:n=600,"{""adapter"": ""identity"", ""inputs"": 0, ""model"": ""crc"", ""radius"": 0.9, ""scale"": 0.03, ""segments"": 4, ""size"": 256, ""solver"": ""lsqr"", ""summary"": ""segment_mean_std_final"", ""tau"": 20}",lsqr,development only
 shd,practical:large-crc:n=full,"{""adapter"": ""identity"", ""inputs"": 0, ""model"": ""crc"", ""radius"": 0.9, ""scale"": 0.03, ""segments"": 4, ""size"": 256, ""solver"": ""lsqr"", ""summary"": ""segment_mean_std_final"", ""tau"": 20}",lsqr,development only
-shd,practical:lstm,"{""fixed_epochs"": 54, ""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:lstm:n=2000,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:lstm:n=600,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:lstm:n=full,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:transformer,"{""fixed_epochs"": 27, ""model"": ""transformer"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:transformer:n=2000,"{""model"": ""transformer"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:transformer:n=600,"{""model"": ""transformer"", ""recipe"": ""baseline""}",neural,development only
-shd,practical:transformer:n=full,"{""model"": ""transformer"", ""recipe"": ""baseline""}",neural,development only
+shd,practical:lstm,"{""fixed_epochs"": 54, ""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+shd,practical:lstm:n=2000,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+shd,practical:lstm:n=600,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+shd,practical:lstm:n=full,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only
+shd,practical:transformer,"{""fixed_epochs"": 27, ""model"": ""transformer"", ""recipe"": ""baseline""}",adamw,development only
+shd,practical:transformer:n=2000,"{""model"": ""transformer"", ""recipe"": ""baseline""}",adamw,development only
+shd,practical:transformer:n=600,"{""model"": ""transformer"", ""recipe"": ""baseline""}",adamw,development only
+shd,practical:transformer:n=full,"{""model"": ""transformer"", ""recipe"": ""baseline""}",adamw,development only
 shd,recurrence:crc:all,"{""inputs"": 4, ""model"": ""crc"", ""radius"": 0.5, ""reset"": ""all"", ""scale"": 1.0, ""size"": 18, ""tau"": 20, ""view"": ""all""}",cholesky,development only
 shd,recurrence:crc:partial,"{""inputs"": 4, ""model"": ""crc"", ""radius"": 0.5, ""reset"": ""partial"", ""scale"": 1.0, ""size"": 18, ""tau"": 20, ""view"": ""all""}",cholesky,development only
 shd,recurrence:qrc:all,"{""depth"": 2, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""reset"": ""all"", ""view"": ""all""}",cholesky,development only
 shd,recurrence:qrc:partial,"{""depth"": 2, ""inputs"": 4, ""model"": ""qrc"", ""qubits"": 6, ""reset"": ""partial"", ""view"": ""all""}",cholesky,development only
-shd,selected_log,"{""model"": ""lstm"", ""recipe"": ""baseline""}",neural,development only
+shd,selected_log,"{""model"": ""lstm"", ""recipe"": ""baseline""}",adamax,development only

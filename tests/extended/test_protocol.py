@@ -79,6 +79,7 @@ class ContinuationTests(SyntheticCase):
         str(seed)
       ])
       request = resolve(args)
+      request["config"]["execution"].update({"qrc_large": "CPU", "device": "cpu"})
       request["config"]["paths"]["runs"] = str(self.root / "runs")
       request["config"]["paths"]["cache"] = str(self.root / "cache")
       with patch("src.workflow.groups", return_value=[declaration]), patch("src.data.datasets.load", return_value=self.data):
@@ -103,6 +104,8 @@ class ContinuationTests(SyntheticCase):
     changed.fingerprint = "changed-numerical-data"
     with self.assertRaisesRegex(ValueError, "contents changed"):
       evaluate_frozen(frozen, False, datasets={"shd": changed})
+    self.assertEqual(body["manifest"]["parameter_register"]["parameters"]["execution.qrc_large"]["value"], "CPU")
+    self.assertEqual(body["manifest"]["parameter_register"]["parameters"]["execution.qrc_large"]["baseline_value"], "GPU")
     role = next(iter(body["manifest"]["entries"]["shd"]))
     body["manifest"]["entries"]["shd"][role]["spec"]["inputs"] = 4
     body["fingerprint"] = digest(body["manifest"])

@@ -71,3 +71,33 @@ class ProtocolTests(SyntheticCase):
           evaluate_run(self.root / "absent/frozen.json", True)
       evaluate.assert_not_called()
       self.assertFalse((self.root / "absent").exists())
+
+  def test_execution_overrides_keep_scientific_provenance(self):
+    """Accept the documented CPU recipe and reject unregistered scientific changes."""
+    import yaml
+    from src.main import parser
+    from src.methodology.parameters import resolve_register
+    from src.workflow import plan, resolve
+    config = load()
+    baseline = read("configs/parameters.json")
+    original = copy.deepcopy(baseline)
+    config["execution"].update({"qrc_small": "CPU", "qrc_large": "CPU", "crc_device": "cpu", "crc_graphs": False, "device": "cpu"})
+    path = self.root / "cpu.yaml"
+    path.write_text(yaml.safe_dump({key: value for key, value in config.items() if key != "neural"}))
+    request = resolve(parser().parse_args(["plan", "--config", str(path), "--profile", "core"]))
+    self.assertTrue(plan(request)["datasets"])
+    registered = resolve_register(request["config"], baseline)
+    self.assertEqual(validate_register(config, registered), [])
+    entry = registered["parameters"]["execution.qrc_large"]
+    self.assertEqual(entry["value"], "CPU")
+    self.assertEqual(entry["baseline_value"], "GPU")
+    self.assertIn("execution-override", entry["origins"])
+    self.assertEqual(baseline, original)
+    config["search"]["depths"] = [1]
+    with self.assertRaisesRegex(ValueError, "stale"):
+      resolve_register(config, baseline)
+    for key, value in (("device", "cpU"), ("cpu_threads", 0), ("crc_graphs", True), ("memory_fraction", float("nan")), ("gpu_threads", 2)):
+      altered = load()
+      altered["execution"][key] = value
+      with self.subTest(key=key), self.assertRaises(ValueError):
+        resolve_register(altered, baseline)

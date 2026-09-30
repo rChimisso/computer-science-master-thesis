@@ -13,6 +13,7 @@ from src.evaluation.metrics import classification_metrics
 from src.models.training_support import atomic_checkpoint, configure_device, restore_rng, rng_state, synchronize
 from src.runtime.storage import scalar_history, work_root
 from src.models.temporal_reference import build_network
+from src.models.protocol import FittingProtocol
 
 def neural_settings(model: str, recipe: str, config: dict) -> dict:
   """Resolve one predeclared neural regularization recipe.
@@ -41,7 +42,7 @@ def make_neural(data: StudyData, model: str, recipe: str, config: dict, device: 
   """
   settings = neural_settings(model, recipe, config)
   network = build_network(data.counts(0).shape[1], data.classes, model, settings, device)
-  if model == "lstm":
+  if FittingProtocol.from_spec({"model": model}).solver == "adamax":
     optimizer = torch.optim.Adamax(network.parameters(), lr=settings["learning_rate"], betas=tuple(settings["betas"]), eps=settings["epsilon"], weight_decay=settings["weight_decay"])
   else:
     optimizer = torch.optim.AdamW(network.parameters(), lr=settings["learning_rate"], weight_decay=settings["weight_decay"])

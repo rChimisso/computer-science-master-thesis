@@ -5183,22 +5183,18 @@
   },
   "official_status": "completed",
   "presentation": {
-    "details": {
-      "dataset": null,
-      "kinds": [],
-      "phase": null,
-      "role": null
-    },
+    "details": {},
     "mode": "canonical tables and compact overviews"
   },
   "rendering_status": "completed",
   "reporting_source": {
+    "src/models/protocol.py": "198d8d45bdd0da33ae0ef7135f75e28d11f66856fe19cef211e2652ba9a62e23",
     "src/reporting/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/reporting/catalog.py": "e5918408b3f969f11b12ef0e72d978c5ed6f95dc24f881185f54bfd906a86789",
-    "src/reporting/evidence.py": "6a9bb09e9bc43d5eb65c9d560baa9ee93fc64d39cd8b90adb5a3cdbd18184e79",
+    "src/reporting/evidence.py": "470b1b0f655ccfbb35e51c4aa072f58a6a8d2c5a39d1179b7e14626c7f26b565",
     "src/reporting/figures.py": "5b35b542fc923043bc361384928ff72622233905c267082c16c8051f7894eeeb",
     "src/reporting/products.py": "e1519d88be528fc0e8c9b4e1ba9f15135120fbf0b8879fbeeaa681e2c6593b1d",
-    "src/reporting/study.py": "2baa7103231f1e2c544bfadd4f44f2af5eed6e8013399125564afb15f8fe23a8"
+    "src/reporting/study.py": "6891e43aa634be73a8d3b9c8d505b44ff91b38ae277ea4bd72bd639f4f829dfd"
   },
   "root": "output/runs/thesis-verification/reports",
   "sources": {

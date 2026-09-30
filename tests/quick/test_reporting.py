@@ -203,3 +203,32 @@ class EvidenceTests(EvidenceCase):
         self.assertEqual(row['features_reused'], 'True')
         self.assertEqual(float(row['inference_seconds_per_example']), 0.001)
         self.assertFalse(list(root.rglob('*.tex')))
+
+  def test_fitting_methods_follow_model_declarations(self):
+    """Infer legacy optimizer labels and reject contradictory fitting records."""
+    from src.models.protocol import FittingProtocol
+    from src.reporting.evidence import job_rows
+    path = next((self.run / "evidence/metrics/jobs").glob("*/result.json"))
+    source = read(path)
+    for model, solver in (("lstm", "adamax"), ("transformer", "adamw")):
+      for phase in ("development", "confirmation", "official"):
+        with self.subTest(model=model, phase=phase):
+          job = copy.deepcopy(source)
+          spec = {"model": model, "recipe": "baseline"}
+          job["identity"].update({"spec": spec, "phase": phase})
+          job["rows"] = [job["rows"][0]]
+          row = job["rows"][0]
+          row.pop("solver")
+          row["lambda"] = None
+          result = {key: [] for key in ("cells", "confusions", "classes", "subjects", "history", "diagnostics")}
+          result["specs"] = {}
+          job_rows(job, "shd", "practical:" + model, job["identity"]["seed"], None, phase, spec, result)
+          self.assertEqual({cell["solver"] for cell in result["cells"]}, {solver})
+          row["solver"] = "cholesky"
+          with self.assertRaisesRegex(ValueError, "fitting method"):
+            job_rows(job, "shd", "practical:" + model, job["identity"]["seed"], None, phase, spec, result)
+    for family in ("crc", "qrc", "projection"):
+      for solver in ("cholesky", "lsqr"):
+        self.assertEqual(FittingProtocol.from_spec({"model": family, "solver": solver}).solver, solver)
+    with self.assertRaisesRegex(ValueError, "Unknown model"):
+      FittingProtocol.from_spec({"model": "unknown"})

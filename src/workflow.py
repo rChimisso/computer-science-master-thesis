@@ -18,6 +18,8 @@ def resolve(args) -> dict:
   :return: Explicit scientific and execution request.
   """
   config = load(args.config)
+  from src.methodology.parameters import resolve_register
+  resolve_register(config, read("configs/parameters.json"))
   for values in (args.models, args.seed or [], args.dataset or [], args.study or []):
     if len(values) != len(set(values)):
       raise ValueError("Duplicate filters are not permitted")
@@ -251,12 +253,11 @@ def run(request: dict, run_id: str | None = None, resume: bool = False, deadline
   :return: Run completion or resumable interruption record.
   """
   from src.data.datasets import load as load_data
-  from src.methodology.parameters import validate_register
+  from src.methodology.parameters import resolve_register
   from src.runtime.storage import compact, snapshot_dataset
   from src.studies.selection import develop
   from src.studies.supporting import learning_curves, mappings
-  register = read("configs/parameters.json")
-  validate_register(request["config"], register)
+  register = resolve_register(request["config"], read("configs/parameters.json"))
   run_id = run_id or datetime.datetime.now(datetime.timezone.utc).strftime("study-%Y%m%dT%H%M%S%fZ")
   if run_id in (".", "..") or Path(run_id).name != run_id:
     raise ValueError("Run identifier must be a single directory name")

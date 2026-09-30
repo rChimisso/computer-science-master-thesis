@@ -6,6 +6,31 @@ from typing import Any
 import numpy as np
 import torch
 
+def inference_device(device: str = "cuda", threads: int = 4) -> torch.device:
+  """Apply the shared deterministic numerical policy without reseeding random streams.
+
+  :param device: Explicit CPU or CUDA device; no fallback is permitted.
+  :param threads: Positive PyTorch CPU thread limit.
+  :return: Verified device using the same precision and algorithms as fitting.
+  """
+  if type(threads) is not int or threads < 1:
+    raise ValueError("CPU thread count must be a positive integer")
+  torch.set_num_threads(threads)
+  torch.use_deterministic_algorithms(True)
+  torch.backends.cudnn.benchmark = False
+  torch.backends.cudnn.deterministic = True
+  torch.backends.cuda.matmul.allow_tf32 = False
+  torch.backends.cudnn.allow_tf32 = False
+  selected = torch.device(device)
+  if selected.type not in ("cpu", "cuda"):
+    raise ValueError("Only CPU and CUDA execution are supported")
+  if selected.type == "cuda":
+    if not torch.cuda.is_available():
+      raise RuntimeError("CUDA requested but unavailable; run with authorized GPU access")
+    if selected.index is None:
+      selected = torch.device("cuda", torch.cuda.current_device())
+  return selected
+
 def configure_device(seed: int, device: str = "cuda", threads: int = 4) -> torch.device:
   """Configure reproducible float32 execution on a fixed device.
 
@@ -17,18 +42,8 @@ def configure_device(seed: int, device: str = "cuda", threads: int = 4) -> torch
   random.seed(seed)
   np.random.seed(seed)
   torch.manual_seed(seed)
-  torch.set_num_threads(threads)
-  torch.use_deterministic_algorithms(True)
-  torch.backends.cudnn.benchmark = False
-  torch.backends.cudnn.deterministic = True
-  torch.backends.cuda.matmul.allow_tf32 = False
-  torch.backends.cudnn.allow_tf32 = False
-  selected = torch.device(device)
+  selected = inference_device(device, threads)
   if selected.type == "cuda":
-    if not torch.cuda.is_available():
-      raise RuntimeError("CUDA requested but unavailable; run with authorized GPU access")
-    if selected.index is None:
-      selected = torch.device("cuda", torch.cuda.current_device())
     torch.cuda.manual_seed_all(seed)
     torch.cuda.reset_peak_memory_stats(selected)
   return selected

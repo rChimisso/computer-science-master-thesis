@@ -18,7 +18,7 @@ python -m src validate --suite quick
 
 Run commands from the repository root. `plan` resolves the requested studies and shows screening counts, conditional work, resource reservations and admission errors without downloading data, starting workers or loading numerical backends. It does not provide the live scheduler's completion forecast. `validate` uses synthetic inputs; it does not evaluate the real official benchmarks.
 
-The checked-in execution policy uses CPU and GPU backends. Installing the CPU recipe does not change that policy: the [environment guide](environment/README.md#execution-scope) explains the configuration changes needed for CPU-only execution.
+The checked-in execution policy uses CPU and GPU backends. Installing the CPU recipe does not change that policy: the [environment guide](environment/README.md#execution-scope) explains the configuration changes needed for CPU-only execution. Supported execution overrides are validated before planning and recorded with their original defaults in each new run's parameter register. Scientific settings still require matching authored justifications.
 
 ## Scientific design and parameter choices
 
@@ -85,7 +85,7 @@ The monitor shows completed/pending task counts, dataset/study summaries and eac
 
 Worker limits are ceilings. Per-task numerical thread settings, memory reservations and dependencies can leave workers idle. Neural fits reserve the GPU exclusively; independent CPU work can overlap. Neural batch calibration and resource measurements run in isolation. Spawned processes isolate RNG and numerical-library settings. Compatible feature requests share extraction and one writer.
 
-On the original laptop, the [recorded worker-policy calibration](environment/verification.json) selected $2$ CPU workers, $12$ threads and $1$ GPU worker. Median mixed-workload elapsed times were $118.40$, $114.61$ and $90.43\,\mathrm{s}$ for policies $1/8/1$, $2/8/1$ and $2/12/1$, each with $3$ repetitions. This supports the local override below, not a portable or full-campaign speedup guarantee.
+For a machine with sufficient CPU capacity, the example below raises the managed thread budget to $12$ while allowing up to $2$ CPU workers and $1$ Aer GPU worker. This is an execution-policy example, not a measured speedup guarantee or a universal recommendation; throughput depends on the workload and available resources.
 
 ```bash
 python -m src plan --profile thesis --cpu-workers 2 --cpu-threads 12 --gpu-workers 1
@@ -107,7 +107,7 @@ python -m src evaluate --manifest output/runs/replay-study/frozen.json --officia
 
 `reproduce` skips configuration selection and runs frozen confirmation. `--run-id` gives it an independent output namespace. `evaluate --official-test` continues a frozen run, including one previously stopped with `--development-only`; repeating it resumes committed work.
 
-Frozen compatibility permits explicitly identified presentation/execution changes while protecting scientific implementations. It does not authorize arbitrary source edits or bypass membership, configuration, environment or integrity checks. Historical producer snapshots retain their actual provenance.
+Frozen compatibility permits explicitly identified presentation/execution changes while protecting scientific implementations. It does not authorize arbitrary source edits or bypass membership, configuration, environment or integrity checks. Historical producer snapshots retain their actual provenance. If the current scientific implementation differs from a saved run, numerical reproduction requires its preserved producer implementation and recorded environment; a new study uses the current implementation in a new run.
 
 ## Reporting and retained artifacts
 
@@ -137,13 +137,37 @@ Each scientific topic contains a reading guide with captions and measurement bou
 | `output/runs/<run-id>/temporary/` | Ignored candidate models and resumable working state |
 | `output/runs/<run-id>/execution/` | Ignored live status and worker logs |
 
-Run manifests, progress and logs also remain local. Reports alone cannot regenerate themselves: retain or transfer their manifests and evidence separately. Final inference packages retain preprocessing, fitted adapters, normalization, class order and model/reservoir/readout parameters. Feature caches support retraining readouts but are not required to read or regenerate reports.
+Run manifests, progress and logs also remain local. Reports alone cannot regenerate themselves: retain or transfer their manifests and evidence separately, or create the verified evidence archive described below. Final inference packages retain preprocessing, fitted adapters, normalization, class order and model/reservoir/readout parameters. Feature caches support retraining readouts but are not required to read or regenerate reports.
 
 Successful completion removes only verified temporary work whose consumers have finished and records intentional pruning. Failed/interrupted work remains resumable. Shared caches and final models are not automatically deleted.
 
+## Portable evidence archives
+
+Archive a completed run after report generation. The command verifies sealed evidence, report dependencies, the original implementation snapshot and every retained inference package before publishing a new archive. It refuses to overwrite an existing destination or archive an active run.
+
+```bash
+python -m src archive --run thesis-verification --output output/archives/thesis-verification.tar.gz
+python -m src verify-archive --archive output/archives/thesis-verification.tar.gz
+```
+
+The versioned `bundle.json` inventories every file by size and SHA-256. Keep the returned archive checksum with the archive when transferring it. Verification reads every member without extracting it or opening datasets, model backends or GPU devices; it also rejects duplicate members, links and unsafe paths. Checksums establish consistency with the supplied inventory, not independent publisher authenticity.
+
+The archive contains `run/` with unchanged manifests, frozen settings, sealed evidence and reports; `models/` with deduplicated inference packages; and `reader/` with the reporting implementation, configurations and environment recipes used when archiving. Raw datasets, feature caches and native binaries are restored separately when numerical reproduction needs them.
+
+After verification, extract the archive into an empty directory and regenerate its reports using the existing environment:
+
+```bash
+mkdir -p /tmp/thesis-evidence
+tar -xzf output/archives/thesis-verification.tar.gz -C /tmp/thesis-evidence
+cd /tmp/thesis-evidence/reader
+python -m src report --run ../run
+```
+
+The separate top-level `pipelines.json` provides portable package references whose `directory` values are relative to the extracted archive root. Resolve those values against that root when calling `src.runtime.pipelines.predict`. Original references inside sealed evidence remain byte-identical for auditability. The reader supports report regeneration; historical numerical reproduction uses the archived producer implementation and its recorded environment.
+
 ## Validation and interpretation limits
 
-See [the test guide](tests/README.md) for the $24$ quick and $16$ integration checks and their coverage limits.
+See [the test guide](tests/README.md) for the $28$ quick and $16$ integration checks and their coverage limits.
 
 ```bash
 python -m src validate --suite all --list

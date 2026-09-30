@@ -4,7 +4,7 @@ Use the `qrc-spiking` environment and run commands from the repository root. The
 
 | Scope | Purpose | Test methods |
 |---|---|---:|
-| `quick/` | Scientific arithmetic, data isolation, selection, evidence validity and bounded execution checks | $24$ |
+| `quick/` | Scientific arithmetic, data isolation, selection, evidence validity and bounded execution checks | $28$ |
 | `extended/` | Complete synthetic workflows, device integration, interruption recovery and offline reports | $16$ |
 
 Related invalid-input cases share named subtests. A failed subtest identifies its scenario; the method count does not represent the number of assertions.
@@ -36,11 +36,12 @@ Without `--gpu`, child processes hide CUDA devices. With it, device preflight re
 | `quick/test_science.py` | Event binning, memberships, train-only fitting, matched inputs, analytical quantum states, padding, metrics and selection |
 | `quick/test_models.py` | Temporal classwise loss and locked dropout |
 | `quick/test_readout.py` | Independent binary/multiclass ridge inference |
+| `quick/test_archive.py` | Archive checksums, coverage, safe member paths and inactive source requirements |
 | `quick/test_cache.py` | Reuse, corruption detection and numerical invalidation |
-| `quick/test_protocol.py` | Optional-model independence, parameter provenance, frozen source protection and official access gates |
+| `quick/test_protocol.py` | Optional-model independence, CPU execution overrides with provenance, frozen source protection and official access gates |
 | `quick/test_execution.py` | Resource admission, task ownership, failure propagation and frozen resumption |
-| `quick/test_reporting.py` | Complete comparisons, paired memberships, compact prediction integrity and resource evidence |
-| `extended/test_workflow.py` | Serial/parallel agreement, optional inference pipelines and neural RNG isolation |
+| `quick/test_reporting.py` | Complete comparisons, fitting-method labels, paired memberships, compact prediction integrity and resource evidence |
+| `extended/test_workflow.py` | Serial/parallel agreement, fresh-process inference policy, archived-reader CLI replay in a fresh process, optional inference pipelines and neural RNG isolation |
 | `extended/test_reservoirs.py` | Complete sequences, independent CRC trajectories, GPU graph replay and quantum interruption |
 | `extended/test_training.py` | Neural checkpoint recovery and calibrated batch sizes |
 | `extended/test_lifecycle.py` | Detachment, cooperative pause and worker cleanup after coordinator death |
@@ -52,7 +53,7 @@ Without `--gpu`, child processes hide CUDA devices. With it, device preflight re
 
 All evaluation inputs are synthetic. No real official-test data are loaded. Device tolerances remain unchanged, including the quantum absolute tolerance of $10^{-10}$.
 
-The suite deliberately omits detailed terminal/ETA behavior, scheduling fairness, plot layout, PDF/filter permutations and environment-build edge cases. It also omits dedicated invalid run-name and archive-traversal checks. Production safeguards remain in place; removing their tests reduces coverage. Mapping figure tests retain numerical source and seed semantics, rather than exact labels or layout.
+The suite deliberately omits detailed terminal/ETA behavior, scheduling fairness, plot layout, PDF/filter permutations and environment-build edge cases. It also omits dedicated invalid run-name checks. Production safeguards remain in place; removing their tests reduces coverage. Mapping figure tests retain numerical source and seed semantics, rather than exact labels or layout.
 
 ## Records and runtime
 

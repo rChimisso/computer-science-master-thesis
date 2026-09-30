@@ -113,7 +113,8 @@ def predict(package: dict, data, indices: np.ndarray, config: dict) -> np.ndarra
     import torch
     from src.models.training import neural_settings, neural_evaluate
     from src.models.temporal_reference import build_network
-    device = torch.device(config["execution"]["device"])
+    from src.models.training_support import inference_device
+    device = inference_device(config["execution"]["device"], config["training"]["cpu_threads"])
     local = config | {"neural": description["neural"], "neural_recipes": description["neural_recipes"]}
     network = build_network(description["channels"], data.classes, spec["model"], neural_settings(spec["model"], spec["recipe"], local), device)
     network.load_state_dict({key: torch.from_numpy(value.copy()).to(device) for key, value in arrays.items()})

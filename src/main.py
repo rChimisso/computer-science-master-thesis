@@ -41,6 +41,11 @@ def parser() -> argparse.ArgumentParser:
   command.add_argument("--detail-dataset", nargs="+", choices=("shd", "dvs"), help="Filter detailed figures only")
   command.add_argument("--detail-role", nargs="+", help="Exact comparison roles for detailed figures only")
   command.add_argument("--detail-phase", nargs="+", help="Exact evaluation phases for detailed figures only")
+  command = commands.add_parser("archive", help="Create a verified portable evidence archive")
+  command.add_argument("--run", required=True)
+  command.add_argument("--output", required=True, help="New archive path outside the source run")
+  command = commands.add_parser("verify-archive", help="Check every archive member without extracting it")
+  command.add_argument("--archive", required=True)
   for action in ("status", "pause"):
     command = commands.add_parser(action)
     command.add_argument("--run", required=True)
@@ -118,6 +123,15 @@ def main(argv: list | None = None) -> None:
       from src.runtime.monitor import render
       print(render(result))
       return
+  elif args.action == "archive":
+    from src.runtime.archive import create
+    root = Path(args.run) if Path(args.run).exists() else Path("output/runs") / args.run
+    result = create(root, Path(args.output))
+  elif args.action == "verify-archive":
+    from src.runtime.archive import verify
+    checked = verify(Path(args.archive))
+    result = {key: value for key, value in checked.items() if key != "inventory"}
+    result.update({"fingerprint": checked["inventory"]["fingerprint"], "files": len(checked["inventory"]["files"]), "scientific_status": checked["inventory"]["scientific_status"]})
   elif args.action == "report":
     root = Path(args.run)
     if not root.exists():

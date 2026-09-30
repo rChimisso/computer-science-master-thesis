@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from threadpoolctl import threadpool_limits
 
+from src.models.protocol import FittingProtocol
 from src.runtime.progress import stage, track
 from src.evaluation.readout import direct_readout, save_state
 from src.features.extraction import extract
@@ -23,6 +24,7 @@ def experiment(data, fold: dict, spec: dict, seed: int, config: dict, penalties:
   :param phase: Population and interpretation boundary.
   :return: Complete metrics, predictions and fitted-state references.
   """
+  protocol = FittingProtocol.from_spec(spec)
   from src.runtime.tasks import current
   scheduler = current(config)
   if scheduler is not None:
@@ -75,6 +77,7 @@ def experiment(data, fold: dict, spec: dict, seed: int, config: dict, penalties:
       from src.models.training import train_neural
       result = train_neural(data, train, held, spec["model"], spec["recipe"], seed, config, spec.get("fixed_epochs"))
       row = {
+        "solver": protocol.solver,
         "lambda": None,
         "train": result["best"]["train"],
         "validation": result["best"]["validation"],
@@ -94,7 +97,7 @@ def experiment(data, fold: dict, spec: dict, seed: int, config: dict, penalties:
       values, features, adapter = extract(data, train, indices, spec, seed, config)
       record.update({"features": features, "adapter": adapter})
       grid = penalties if penalties is not None else config["readout"]["lambdas"]
-      solver = spec.get("solver", "cholesky")
+      solver = protocol.solver
       with threadpool_limits(limits=config["execution"]["cpu_threads"]):
         for ceiling in (1000, 5000):
           rows = []

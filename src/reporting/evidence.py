@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 
 from src.evaluation.metrics import assert_metrics, prediction_metrics
+from src.models.protocol import FittingProtocol
 from src.runtime.records import checksum, digest, read
 
 def resource_coverage(evidence: dict) -> list:
@@ -122,7 +123,7 @@ def job_rows(job: dict, dataset: str, role: str, seed: int, penalty, phase: str,
     "protocol": digest({"spec": expected_spec, "phase": phase}),
     "adapter": job.get("adapter", {}).get("fingerprint") if job.get("adapter") else "rich-input",
     "training_membership": digest(members["train"]),
-    "solver": row.get("solver", expected_spec.get("solver", "cholesky")),
+    "solver": FittingProtocol.from_spec(expected_spec, row).solver,
     "lambda": penalty
   }
   for population, prediction_key, metric_key in (("train", "train_predictions", "train"), ("held", "predictions", "validation")):
@@ -322,7 +323,7 @@ def collect(run: Path) -> dict:
             "selected": job["identity"]["spec"] == {key: value for key, value in chosen["spec"].items() if key != "fixed_epochs"} and row["lambda"] == chosen["selection"]["lambda"],
             "feature_dimension": row.get("feature_dimension"),
             "readout_norm": row.get("readout_norm"),
-            "solver": row.get("solver"),
+            "solver": FittingProtocol.from_spec(job["identity"]["spec"], row).solver,
             "iterations": str(row.get("iterations", []))
           })
 

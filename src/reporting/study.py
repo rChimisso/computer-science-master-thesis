@@ -3,6 +3,7 @@ import shutil
 import tempfile
 from pathlib import Path
 
+from src.models.protocol import FittingProtocol
 from src.reporting.evidence import collect
 from src.reporting.products import aggregate, contrasts, export, metrics, structure, topic
 from src.runtime.progress import stage
@@ -48,7 +49,7 @@ def report(run: Path, pdf: bool = False, details: dict | None = None) -> dict:
       "cells": len(cells),
       "presentation": {"mode": "canonical tables and compact overviews", "details": details or {}},
       "sources": evidence["sources"],
-      "reporting_source": {str(path): checksum(path) for path in sorted(Path("src/reporting").glob("*.py"))},
+      "reporting_source": {str(path): checksum(path) for path in sorted([*Path("src/reporting").glob("*.py"), Path("src/models/protocol.py")])},
       "root": str(output),
       "coverage": coverage,
       "uncertainty": "Sample SD across seeds after averaging folds within each seed; fold variability is descriptive, not independent replication"
@@ -115,7 +116,7 @@ def render(root: Path, evidence: dict, summaries: list, differences: list, paire
   export(root, "resources", "reservoir-structure", structure(evidence))
   protocols = []
   for (dataset, role), spec in sorted(evidence["specs"].items()):
-    protocols.append({"dataset": dataset, "role": role, "settings": json.dumps(spec, sort_keys=True), "solver": spec.get("solver", "neural" if spec["model"] in ("lstm", "transformer") else "cholesky"), "selection_population": "development only"})
+    protocols.append({"dataset": dataset, "role": role, "settings": json.dumps(spec, sort_keys=True), "solver": FittingProtocol.from_spec(spec).solver, "selection_population": "development only"})
   export(root, "methodology", "protocols", protocols)
   register = evidence["manifest"]["parameter_register"]
   from src.methodology.parameters import validate_register

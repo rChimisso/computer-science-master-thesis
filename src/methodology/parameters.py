@@ -1,3 +1,5 @@
+import copy
+
 def parameters(value: dict, prefix: str = "") -> dict:
   """Flatten configuration leaves while retaining candidate arrays as values.
 
@@ -38,3 +40,32 @@ def validate_register(config: dict, register: dict) -> list:
       unresolved.append(name)
   return unresolved
 
+def resolve_register(config: dict, register: dict) -> dict:
+  """Record validated operational overrides while retaining strict scientific provenance.
+
+  :param config: Requested configuration for a new run.
+  :param register: Authored baseline register, which is never modified.
+  :return: Independent register with actual execution values and their original defaults.
+  :raises ValueError: If an execution value is unsupported or a scientific value changed.
+  """
+  from src.runtime.configuration import ExecutionSettings
+  from src.runtime.records import digest
+  ExecutionSettings.from_config(config)
+  result = copy.deepcopy(register)
+  for name, value in parameters(config).items():
+    if not name.startswith("execution.") or name not in result["parameters"]:
+      continue
+    entry = result["parameters"][name]
+    if entry["value"] == value:
+      continue
+    result["parameters"][name] = entry | {
+      "value": value,
+      "origins": list(dict.fromkeys(entry["origins"] + ["execution-override"])),
+      "rationale": entry["rationale"] + " This run explicitly overrides the operational setting for its execution environment; the requested value remains frozen and participates in compatibility checks.",
+      "baseline_value": entry["value"],
+      "baseline_entry_sha256": digest(entry)
+    }
+    if "execution-override" not in result["origins"]:
+      result["origins"].append("execution-override")
+  validate_register(config, result)
+  return result

@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from threadpoolctl import threadpool_limits
 
+from src.models.protocol import FittingProtocol
 from src.runtime.progress import stage
 from src.evaluation.metrics import classification_metrics
 from src.evaluation.readout import direct_readout, fit_readout, predict_readout, save_state
@@ -59,7 +60,7 @@ def fit(data, entry: dict, seed: int, config: dict) -> dict:
   else:
     values, features, adapter = extract(data, indices, indices, spec, seed, config)
     with threadpool_limits(limits=config["execution"]["cpu_threads"]):
-      if spec.get("solver", "cholesky") == "cholesky":
+      if FittingProtocol.from_spec(spec).solver == "cholesky":
         row, state, _ = direct_readout(values, values[:1], data.labels, data.labels[:1], penalty, data.classes)
       else:
         for limit in (1000, 5000):
@@ -129,6 +130,7 @@ def evaluate(data, held, entry: dict, fitted: dict, seed: int, config: dict) -> 
       predictions = predict_readout(values, state).tolist()
   metric = classification_metrics(held.labels, np.asarray(predictions), held.classes)
   row = {
+    "solver": FittingProtocol.from_spec(spec).solver,
     "lambda": entry["selection"]["lambda"],
     "train": fitted["train"],
     "validation": metric,

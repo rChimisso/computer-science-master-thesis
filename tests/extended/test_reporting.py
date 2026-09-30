@@ -25,6 +25,8 @@ class ReportTests(EvidenceCase):
       first = report(self.run)
       self.assertEqual(first["development_status"], "completed")
       self.assertEqual(first["official_status"], "pending")
+      self.assertEqual(first["reporting_source"]["src/models/protocol.py"], checksum("src/models/protocol.py"))
+      self.assertEqual(first["reporting_source"]["src/models/protocol.py"], checksum("src/models/protocol.py"))
       output = self.run / "reports"
       hashes = {str(path.relative_to(output)): checksum(path) for path in output.rglob("*.csv")}
       shutil.rmtree(output)
